@@ -12,7 +12,7 @@ class RecentlyFamousUtattemitaController extends Controller
         if($sort == 1){
             $vocalovideos = DB::table('recently_famous_utattemita')->orderBy('view_count','desc')->paginate(10);
         }else{
-            $vocalovideos = DB::table('recently_famous_utattemita')->orderBy('published_at')->paginate(10);
+            $vocalovideos = DB::table('recently_famous_utattemita')->orderBy('published_at','desc')->paginate(10);
         }
         return view('utattemita.recently_famous_utattemita',compact('vocalovideos','page','sort'));
     }

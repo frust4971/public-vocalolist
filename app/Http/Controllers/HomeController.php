@@ -14,13 +14,13 @@ class HomeController extends Controller
         if(Cache::has('pickup_vocalovideos_cache')){
             $pickup_vocalovideos = Cache::get('pickup_vocalovideos_cache');
         }else{
-            $pickup_vocalovideos = DB::table('recently_famous_vocalovideos')->orderBy('published_at')->limit(9)->get();
+            $pickup_vocalovideos = DB::table('recently_famous_vocalovideos')->orderBy('published_at','desc')->limit(9)->get();
             Cache::put('pickup_vocalovideos_cache',$pickup_vocalovideos,$ttl);
         }
         if(Cache::has('pickup_utattemita')){
             $pickup_utattemita = Cache::get('pickup_utattemita');
         }else{
-            $pickup_utattemita = DB::table('recently_famous_utattemita')->orderBy('published_at')->limit(9)->get();
+            $pickup_utattemita = DB::table('recently_famous_utattemita')->orderBy('published_at','desc')->limit(9)->get();
             Cache::put('pickup_vocalovideos_cache',$pickup_vocalovideos,$ttl);
         }
 

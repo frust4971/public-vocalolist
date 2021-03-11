@@ -42,5 +42,5 @@
             </div>
         </div>
     @endfor
-    {{$vocalovideos->links()}}
+    {{$vocalovideos->links('vendor.pagination.original_pagination_view')}}
 @endsection
