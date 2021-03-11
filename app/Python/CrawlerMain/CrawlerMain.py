@@ -17,7 +17,9 @@ if __name__ == "__main__":
     recently_utattemita_published_after = (datetime.datetime.today() + relativedelta(months=-13)).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     recently_utattemita_published_before = (datetime.datetime.today()).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     Crawler.crawlAndInsertToDB("recently_famous_utattemita", "ボカロ 歌ってみた", True, "short", 100000, recently_utattemita_published_after, recently_utattemita_published_before)
-    Crawler.crawlAndInsertToDB("recently_famous_utattemita","ボカロ 歌ってみた",True,"medium",100000,recently_utattemita_published_after,recently_utattemita_published_before)
+    Crawler.crawlAndInsertToDB("recently_famous_utattemita", "ボカロ 歌ってみた", True, "medium", 100000, recently_utattemita_published_after, recently_utattemita_published_before)
+    Crawler.crawlAndInsertToDB("recently_famous_utattemita", "ボカロ cover", True, "short", 100000, recently_utattemita_published_after, recently_utattemita_published_before)
+    Crawler.crawlAndInsertToDB("recently_famous_utattemita","ボカロ cover",True,"medium",100000,recently_utattemita_published_after,recently_utattemita_published_before,must_disconnect_db=True)
     
     #ボカロTOP100を更新する
     Crawler.crawlAndInsertToDB("famous_vocalovideos", "vocaloid", False, "short", 1000000)
