@@ -13,7 +13,7 @@ youtube = build("youtube","v3",developerKey=API_KEY)
 def isVocaloTitle(title):
     if re.match('.*オリジナル曲.*',title):
         return True
-    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|神曲|合唱|太鼓|remix|曲|弾い|みた|バンド).*',re.IGNORECASE)
+    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|神曲|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ).*',re.IGNORECASE)
     if notVocaloPattern.match(title):
         return False
     return True
