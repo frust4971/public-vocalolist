@@ -42,4 +42,3 @@
     </li>
 </ul>
 @endif
-{{$end_page}}
