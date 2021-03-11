@@ -3,7 +3,7 @@
 
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPM85P5MJR"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LJ6J6CGNS"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -12,7 +12,7 @@
         }
         gtag('js', new Date());
 
-        gtag('config', 'G-GPM85P5MJR');
+        gtag('config', 'G-1LJ6J6CGNS');
     </script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
