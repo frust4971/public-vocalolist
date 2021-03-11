@@ -1,7 +1,7 @@
 # coding: UTF-8
 import re
 import os
-from googleapiclient.discovery import build
+from googleapiclient import build
 import datetime
 from dateutil.relativedelta import relativedelta
 import EnvSetter

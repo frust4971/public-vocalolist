@@ -26,4 +26,12 @@ if __name__ == "__main__":
     Crawler.crawlAndInsertToDB("famous_vocalovideos", "vocaloid", False, "short", 1000000)
     Crawler.crawlAndInsertToDB("famous_vocalovideos","vocaloid",False,"medium",1000000)
     Crawler.crawlAndInsertToDB("famous_vocalovideos", "ボカロ", False, "short", 1000000)
-    Crawler.crawlAndInsertToDB("famous_vocalovideos","ボカロ",False,"medium",1000000,must_disconnect_db=True)
+    Crawler.crawlAndInsertToDB("famous_vocalovideos", "ボカロ", False, "medium", 1000000)
+
+    #一年で再生回数100万以上を有名ボカロに追加
+    vocalo_published_after = (datetime.datetime.today() + relativedelta(months=-12)).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    vocalo_published_before = (datetime.datetime.today()).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    Crawler.crawlAndInsertToDB("famous_vocalovideos", "vocaloid", False, "short", 1000000,vocalo_published_after,vocalo_published_before)
+    Crawler.crawlAndInsertToDB("famous_vocalovideos","vocaloid",False,"medium",1000000,vocalo_published_after,vocalo_published_before)
+    Crawler.crawlAndInsertToDB("famous_vocalovideos", "ボカロ", False, "short", 1000000,vocalo_published_after,vocalo_published_before)
+    Crawler.crawlAndInsertToDB("famous_vocalovideos", "ボカロ", False, "medium", 1000000,vocalo_published_after,vocalo_published_before, must_disconnect_db=True)
