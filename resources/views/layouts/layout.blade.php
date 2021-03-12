@@ -64,6 +64,7 @@
             </ul>
         </div>
     </nav>
+    @yield('breadcrumbs')
     <div class="container mt-3">
         @yield('contents')
     </div>

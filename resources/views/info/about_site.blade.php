@@ -2,6 +2,9 @@
 @section('title')
 VocaloList|このサイトについて
 @endsection
+@section('breadcrumbs')
+{{Breadcrumbs::render('info.about_site')}}
+@endsection
 @section('contents')
 <div class="comment">
             <br>

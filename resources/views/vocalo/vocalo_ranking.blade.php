@@ -2,6 +2,9 @@
 @section('title')
 歴代ボカロランキング|VocaloList
 @endsection
+@section('breadcrumbs')
+{{Breadcrumbs::render('vocalo.vocalo_ranking')}}
+@endsection
 @section('contents')
     <div class="row">
         <div class="ml-4 mt-2">

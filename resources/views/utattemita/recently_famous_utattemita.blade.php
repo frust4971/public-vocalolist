@@ -2,6 +2,9 @@
 @section('title')
 最近話題のボカロ歌ってみた！| VocaloList
 @endsection
+@section('breadcrumbs')
+{{Breadcrumbs::render('utattemita.recently_famous_utattemita')}}
+@endsection
 @section('contents')
     <div class="row">
         <div class="ml-4 mt-2">

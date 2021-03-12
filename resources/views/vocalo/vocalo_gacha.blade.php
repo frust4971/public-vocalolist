@@ -2,6 +2,9 @@
 @section('title')
 ボカロガチャ|VocaloList
 @endsection
+@section('breadcrumbs')
+{{Breadcrumbs::render('vocalo.vocalo_gacha')}}
+@endsection
 @section('contents')
 <div class="row">
             <div class="ml-4 mt-2">
