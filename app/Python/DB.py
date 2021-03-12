@@ -14,6 +14,8 @@ conn = mysql.connector.connect(
 cur = conn.cursor()
 date_format = re.compile('\d+-\d+-\d+')
 def insertVideo(table_name, video, view_count):
+    if isAlreadyInsertedItem('not_vocalovideos', video):
+        return
     #mysqlの8.023ではYouTubeから取得した日付のフォーマットでいれようとするとエラーを出されるためフォーマット調整
     published_at = date_format.match(video["snippet"]["publishedAt"]).group()
     #バインドでテーブル名を埋め込むことができなかったのでifで対応
@@ -70,7 +72,8 @@ def deleteOldData(table_name):
 
 def updateViewCount(video, view_count):
     cur.execute("UPDATE famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
-
+def insertToNotVocalovideos(video_id):
+    cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
 def commit():
     conn.commit()
 
