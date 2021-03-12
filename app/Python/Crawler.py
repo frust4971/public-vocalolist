@@ -20,7 +20,7 @@ def isVocaloTitle(title):
     return True
 
 def isUtatteMitaTitle(title):
-    notUtatteMitaPattern = re.compile('.*(ランキング|メドレー|替え歌|再生).*',re.IGNORECASE)
+    notUtatteMitaPattern = re.compile('.*(ランキング|メドレー|替え歌|再生|ミク|リン|レン|ウナ|GUMI|ルカ).*',re.IGNORECASE)
     if notUtatteMitaPattern.match(title):
         return False
     return True
