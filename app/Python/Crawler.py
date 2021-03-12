@@ -15,12 +15,12 @@ def isVocaloTitle(title):
     
     if re.match('.*オリジナル曲.*',title):
         return True
-    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|神曲|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva).*',re.IGNORECASE)
+    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|神曲|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd).*',re.IGNORECASE)
     if notVocaloPattern.match(title):
         return False
     if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
         return True
-    return True
+    return False
 
 def isUtatteMitaTitle(title):
     notUtatteMitaPattern = re.compile('.*(ランキング|メドレー|替え歌|再生|ミク|リン|レン|ウナ|GUMI|ルカ).*',re.IGNORECASE)
@@ -114,4 +114,3 @@ def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_v
     DB.commit()
     if must_disconnect_db:
         DB.disconnect()
-

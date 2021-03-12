@@ -81,3 +81,6 @@ def commit():
 def disconnect():
     cur.close()
     conn.disconnect()
+# insertToNotVocalovideosAndDelete("j_xJFEIH-Ck")
+# commit()
+# disconnect()
