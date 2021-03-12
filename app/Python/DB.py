@@ -72,7 +72,8 @@ def deleteOldData(table_name):
 
 def updateViewCount(video, view_count):
     cur.execute("UPDATE famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
-def insertToNotVocalovideos(video_id):
+def insertToNotVocalovideosAndDelete(video_id):
+    cur.execute("DELETE FROM famous_vocalovideos WHERE video_id = %s",(video_id,))
     cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
 def commit():
     conn.commit()

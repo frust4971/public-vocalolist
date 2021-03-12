@@ -12,11 +12,14 @@ EnvSetter.setEnv()
 API_KEY = os.environ["YOUTUBE_API_KEY"]
 youtube = build("youtube","v3",developerKey=API_KEY)
 def isVocaloTitle(title):
+    
     if re.match('.*オリジナル曲.*',title):
         return True
-    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|神曲|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力).*',re.IGNORECASE)
+    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|神曲|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva).*',re.IGNORECASE)
     if notVocaloPattern.match(title):
         return False
+    if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
+        return True
     return True
 
 def isUtatteMitaTitle(title):
