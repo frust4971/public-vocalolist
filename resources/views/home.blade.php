@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 @section('title')
-VocaloList|ボカロのことならおまかせ！ランキングから最近話題の歌ってみたまで
+<title>VocaloList|ボカロのことならおまかせ！歴代ランキングから最近話題の歌ってみたまで</title>
+@endsection
+@section('description')
+<meta name="description" content="ボカロを聴くならVocaloList。話題になっているボカロ曲や歌ってみた動画を毎日更新！超有名ボカロ曲のガチャもあるよ">
 @endsection
 @section('contents')
 <br>

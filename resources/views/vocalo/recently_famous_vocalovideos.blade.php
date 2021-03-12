@@ -1,6 +1,9 @@
 @extends('layouts.layout')
 @section('title')
-最近話題のボカロ|VocaloList
+<title>最近話題のボカロ|VocaloList</title>
+@endsection
+@section('description')
+<meta name="description" content="YouTubeで再生回数10万越えの最近話題になっているボカロ曲を集めました。投稿日順やランキング順で見逃している曲がないか確認しよう！まだ見ぬ有名ボカロPに出会えるかもしれないぞ">
 @endsection
 @section('breadcrumbs')
 {{Breadcrumbs::render('vocalo.recently_famous_vocalovideos')}}

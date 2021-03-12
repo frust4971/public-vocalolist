@@ -31,7 +31,8 @@
             background-color: aliceblue;
         }
     </style>
-    <title>@yield('title')</title>
+    @yield('title')
+    @yield('description')
 </head>
 
 <body>
