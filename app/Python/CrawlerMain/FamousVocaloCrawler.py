@@ -51,7 +51,7 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
                 finished = True
                 break
             if DB.isAlreadyInsertedItem(table_name, video):
-                DB.updateViewCount(video,view_count)
+                DB.updateViewCount("famous_vocalovideos",video,view_count)
                 continue
 
             if Crawler.isVocaloTitle(video["snippet"]["title"]):

@@ -71,8 +71,14 @@ def deleteOldData(table_name):
         elif table_name == "recently_famous_utattemita":
             cur.execute("DELETE FROM recently_famous_utattemita ORDER BY published_at LIMIT %s", (delete_num,))
 
-def updateViewCount(video, view_count):
-    cur.execute("UPDATE famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
+def updateViewCount(table_name, video, view_count):
+    if table_name == "recently_famous_vocalovideos":
+        cur.execute("UPDATE recently_famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
+    elif table_name == "recently_famous_utattemita":
+        cur.execute("UPDATE recently_famous_utattemita SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
+    elif table_name == "famous_vocalovideos":
+        cur.execute("UPDATE famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
+    
 def insertToNotVocalovideosAndDelete(video_id):
     cur.execute("SELECT video_id FROM not_vocalovideos WHERE video_id = %s", (video_id,))
     if cur.fetchone():
@@ -87,6 +93,6 @@ def disconnect():
     conn.disconnect()
 
 if __name__ == "__main__":
-    insertToNotVocalovideosAndDelete("T0O3tJBm7jA")
+    insertToNotVocalovideosAndDelete("JES55S-l5RM")
     commit()
     disconnect()

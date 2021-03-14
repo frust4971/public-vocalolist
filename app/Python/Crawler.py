@@ -96,8 +96,7 @@ def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_v
                 finished = True
                 break
             if DB.isAlreadyInsertedItem(table_name, video):
-                if table_name == "famous_vocalovideos":
-                    DB.updateViewCount(video,view_count)
+                DB.updateViewCount(table_name,video,view_count)
                 continue
 
             if is_utattemita and isUtatteMitaTitle(video["snippet"]["title"]):
