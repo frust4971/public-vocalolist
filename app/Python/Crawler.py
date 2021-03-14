@@ -15,7 +15,7 @@ def isVocaloTitle(title):
     
     if re.match('.*オリジナル曲.*',title):
         return True
-    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|神曲|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd).*',re.IGNORECASE)
+    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|神曲|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd|mad|カラオケ|真似).*',re.IGNORECASE)
     if notVocaloPattern.match(title):
         return False
     if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):

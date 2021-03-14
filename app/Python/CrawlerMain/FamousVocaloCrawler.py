@@ -7,10 +7,11 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import Crawler
 import DB
 
-def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_duration, filter_view_count, published_after=None, published_before=None, must_disconnect_db=False):
+def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_duration, filter_view_count, published_after=None, published_before=None):
     """
     基本的にCrawlerのcrawlAndInsertToDBと処理は同じ\r\n
-    差分：クロールするページの上限を無くした\r\n
+    差分：must_disconnect_dbがない。クロールするページの上限を無くした\r\n
+    DB切断は使う側が行う必要がある\r\n
     実行する日程は決めて通常のクローリングと別の日に行ったほうがよい、使用するクォータは800程度\r\n
     再生回数の検索結果を指定したテーブルに挿入する。テーブルが整理対象であれば同時に整理も行う
 
@@ -38,9 +39,6 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
     
     published_before : datetime
         指定した日時より前に作成された動画を返す
-
-    must_disconnect_db : bool
-        DBの切断を行うかどうか
     """
     table_name = table_name
     search_response = Crawler.crawl(word, video_duration,published_after,published_before)
@@ -65,10 +63,12 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
     
 
     DB.commit()
-    if must_disconnect_db:
-        DB.disconnect()
 if __name__ == "__main__":
-    crawlAndInsertFamousVocalovideosToDB("famous_vocalovideos", "vocaloid", False, "short", 1000000)
-    crawlAndInsertFamousVocalovideosToDB("famous_vocalovideos", "vocaloid", False, "medium", 1000000)
-    crawlAndInsertFamousVocalovideosToDB("famous_vocalovideos", "ボカロ", False, "short", 1000000)
-    crawlAndInsertFamousVocalovideosToDB("famous_vocalovideos","ボカロ",False,"medium",1000000,must_disconnect_db=True)
+    researchWords = ["vocaloid", "ボカロ", "ボカロ feat", "ボカロ GUMI", "ボカロ IA", "ボカロ　ミク", "ボカロ　リン", "ボカロ　レン", "ボカロ　ウナ",
+    "ボカロ　ルカ","ボカロ　flower","ボカロ Lily","ボカロ　KAITO","ボカロ　miki","ボカロ　mayu"
+    ]
+    for researchWord in researchWords:
+        crawlAndInsertFamousVocalovideosToDB("famous_vocalovideos", researchWord, False, "short", 1000000)
+        crawlAndInsertFamousVocalovideosToDB("famous_vocalovideos", researchWord, False, "medium", 1000000)
+    DB.disconnect()
+    

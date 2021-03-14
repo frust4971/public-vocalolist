@@ -3,6 +3,7 @@ import mysql.connector
 import os
 import EnvSetter
 import re
+import datetime
 EnvSetter.setEnv()
 conn = mysql.connector.connect(
     host=os.environ["DB_HOST"],
@@ -27,8 +28,8 @@ def insertVideo(table_name, video, view_count):
         cur.execute("INSERT INTO recently_famous_utattemita VALUES (%(video_id)s,%(title)s,%(view_count)s,%(published_at)s)",
         {"video_id": video["id"]["videoId"], "title": video["snippet"]["title"], "view_count": view_count, "published_at": published_at})
     elif table_name == "famous_vocalovideos":
-        cur.execute("INSERT INTO famous_vocalovideos VALUES (%(video_id)s,%(title)s,%(view_count)s,%(published_at)s)",
-        {"video_id": video["id"]["videoId"], "title": video["snippet"]["title"], "view_count": view_count, "published_at": published_at})
+        cur.execute("INSERT INTO famous_vocalovideos VALUES (%(video_id)s,%(title)s,%(view_count)s,%(published_at)s,%(insert_at)s)",
+        {"video_id": video["id"]["videoId"], "title": video["snippet"]["title"], "view_count": view_count, "published_at": published_at,'insert_at':datetime.datetime.today().strftime("%Y-%m-%d")})
 
 
 def isAlreadyInsertedItem(table_name, video):
@@ -73,6 +74,9 @@ def deleteOldData(table_name):
 def updateViewCount(video, view_count):
     cur.execute("UPDATE famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
 def insertToNotVocalovideosAndDelete(video_id):
+    cur.execute("SELECT video_id FROM not_vocalovideos WHERE video_id = %s", (video_id,))
+    if cur.fetchone():
+        return
     cur.execute("DELETE FROM famous_vocalovideos WHERE video_id = %s",(video_id,))
     cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
 def commit():
@@ -81,6 +85,8 @@ def commit():
 def disconnect():
     cur.close()
     conn.disconnect()
-# insertToNotVocalovideosAndDelete("j_xJFEIH-Ck")
-# commit()
-# disconnect()
+
+if __name__ == "__main__":
+    insertToNotVocalovideosAndDelete("T0O3tJBm7jA")
+    commit()
+    disconnect()
