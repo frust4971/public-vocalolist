@@ -9,10 +9,9 @@ import DB
 
 
 if __name__ == "__main__":
-    researchWords = ["vocaloid", "ボカロ", "ボカロ feat", "ボカロ GUMI", "ボカロ　リン", "ボカロ　ウナ",
-    "ボカロ　ルカ"]
+    researchWords = ["vocaloid", "ボカロ", "ボカロ feat", "ボカロ IA", "ボカロ　ミク", "ボカロ　レン",
+    "ボカロ　flower","ボカロ Lily","ボカロ　KAITO","ボカロ　miki","ボカロ　mayu"]
     for researchWord in researchWords:
         Crawler.crawlAndInsertFamousVocalovideosToDB("famous_vocalovideos", researchWord, False, "short", 1000000)
         Crawler.crawlAndInsertFamousVocalovideosToDB("famous_vocalovideos", researchWord, False, "medium", 1000000)
     DB.disconnect()
-    
