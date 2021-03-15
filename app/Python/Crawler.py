@@ -42,6 +42,18 @@ def crawl(word, video_duration, published_after, published_before, page_token=No
     ).execute()
     return search_response
 
+def crawlOrderByRelevance(word, video_duration, published_after, published_before):
+    search_response = youtube.search().list(
+        part="id,snippet",
+        q=word,
+        type="video",
+        maxResults=50,
+        videoDuration=video_duration,
+        publishedAfter=published_after,
+        publishedBefore=published_before
+    ).execute()
+    return search_response
+
 def getViewCount(video):
     response = youtube.videos().list(
         part="statistics",
@@ -84,7 +96,6 @@ def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_v
         DBの切断を行うかどうか
     """
     counter = 0
-    table_name = table_name
     search_response = crawl(word, video_duration,published_after,published_before)
     videos = search_response["items"]
     finished = False
@@ -109,6 +120,57 @@ def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_v
         search_response = crawl(word, video_duration,published_after,published_before,page_token=search_response["nextPageToken"])
         videos = search_response["items"]
     
+    DB.deleteOldData(table_name)
+    DB.commit()
+    if must_disconnect_db:
+        DB.disconnect()
+
+def crawlOrderByRelevanceAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_view_count, published_after=None, published_before=None,must_disconnect_db=False):
+    """
+    再生回数の検索結果を指定したテーブルに挿入する。テーブルが整理対象であれば同時に整理も行う
+
+    Parameters
+    ----------
+    table_name : string
+        データを挿入するテーブル名
+
+    word : string
+        検索ワード
+
+    is_utattemita : bool
+        歌ってみたの判別に必要
+
+    video_duration : string
+        動画の種類分け
+        short 4分未満
+        medium 4分以上20分以下
+
+    filter_view_count : int
+        指定した再生回数以上の動画を返す
+
+    published_after : datetime
+        指定した日時より後に作成された動画を返す
+    
+    published_before : datetime
+        指定した日時より前に作成された動画を返す
+
+    must_disconnect_db : bool
+        DBの切断を行うかどうか
+    """
+    search_response = crawlOrderByRelevance(word, video_duration,published_after,published_before)
+    videos = search_response["items"]
+    for video in videos:
+        view_count = getViewCount(video)
+        if view_count < filter_view_count:
+            continue
+        if DB.isAlreadyInsertedItem(table_name, video):
+            DB.updateViewCount(table_name,video,view_count)
+            continue
+
+        if is_utattemita and isUtatteMitaTitle(video["snippet"]["title"]):
+            DB.insertVideo(table_name, video, view_count)
+        elif isVocaloTitle(video["snippet"]["title"]):
+            DB.insertVideo(table_name, video, view_count)
     DB.deleteOldData(table_name)
     DB.commit()
     if must_disconnect_db:
