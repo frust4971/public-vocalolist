@@ -113,8 +113,9 @@ def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_v
                 DB.updateViewCount(table_name,video,view_count)
                 continue
 
-            if is_utattemita and isUtatteMitaTitle(video["snippet"]["title"]):
-                DB.insertVideo(table_name, video, view_count)
+            if is_utattemita:
+                if isUtatteMitaTitle(video["snippet"]["title"]):
+                    DB.insertVideo(table_name, video, view_count)
             elif isVocaloTitle(video["snippet"]["title"]):
                 DB.insertVideo(table_name, video, view_count)
         finished = finished or counter <= 2
@@ -170,8 +171,9 @@ def crawlOrderByRelevanceAndInsertToDB(table_name, word, is_utattemita, video_du
             DB.updateViewCount(table_name,video,view_count)
             continue
 
-        if is_utattemita and isUtatteMitaTitle(video["snippet"]["title"]):
-            DB.insertVideo(table_name, video, view_count)
+        if is_utattemita:
+            if isUtatteMitaTitle(video["snippet"]["title"]):
+                DB.insertVideo(table_name, video, view_count)
         elif isVocaloTitle(video["snippet"]["title"]):
             DB.insertVideo(table_name, video, view_count)
     DB.deleteOldData(table_name)
@@ -213,12 +215,12 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
         指定した日時より前に作成された動画を返す
     """
     table_name = table_name
-    search_response = Crawler.crawl(word, video_duration,published_after,published_before)
+    search_response = crawl(word, video_duration,published_after,published_before)
     videos = search_response["items"]
     finished = False
     while True:
         for video in videos:
-            view_count = Crawler.getViewCount(video)
+            view_count = getViewCount(video)
             if view_count < filter_view_count:
                 finished = True
                 break
@@ -226,11 +228,11 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
                 DB.updateViewCount("famous_vocalovideos",video,view_count)
                 continue
 
-            if Crawler.isVocaloTitle(video["snippet"]["title"]):
+            if isVocaloTitle(video["snippet"]["title"]):
                 DB.insertVideo(table_name, video, view_count)
         if finished:
             break
-        search_response = Crawler.crawl(word, video_duration,published_after,published_before,page_token=search_response["nextPageToken"])
+        search_response = crawl(word, video_duration,published_after,published_before,page_token=search_response["nextPageToken"])
         videos = search_response["items"]
     
 
