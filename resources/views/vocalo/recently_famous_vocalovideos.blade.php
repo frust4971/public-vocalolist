@@ -23,7 +23,7 @@
             </button>
             
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/vocalo/recently_famous_vocalovideos?sort=0">投稿日順</a>
+                <a class="dropdown-item" href="/vocalo/recently_famous_vocalovideos">投稿日順</a>
                 <a class="dropdown-item" href="/vocalo/recently_famous_vocalovideos?sort=1">再生回数順</a>
             </div>
         </div>
@@ -48,5 +48,5 @@
             </div>
         </div>
     @endfor
-    {{$vocalovideos->links('vendor.pagination.original_pagination_view')}}
+    {{$vocalovideos->appends($sort == 0 ? :array( 'sort'=>$sort))->links('vendor.pagination.original_pagination_view')}}
 @endsection
