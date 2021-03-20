@@ -48,5 +48,8 @@
             </div>
         </div>
     @endfor
-    {{$utattemita->appends(array( $sort == 0 ? :'sort'=>$sort))->links('vendor.pagination.original_pagination_view')}}
+    <?php $queries = array();
+        $sort == 0 ? : $queries['sort'] = $sort
+    ?>
+    {{$utattemita->appends($queries)->links('vendor.pagination.original_pagination_view')}}
 @endsection

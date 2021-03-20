@@ -48,5 +48,8 @@
             </div>
         </div>
     @endfor
-    {{$vocalovideos->appends(array( $sort == 0 ? :'sort'=>$sort))->links('vendor.pagination.original_pagination_view')}}
+    <?php $queries = array();
+        $sort == 0 ? : $queries['sort'] = $sort
+    ?>
+    {{$vocalovideos->appends($queries)->links('vendor.pagination.original_pagination_view')}}
 @endsection
