@@ -10,7 +10,8 @@ import DB
 
 EnvSetter.setEnv()
 API_KEY = os.environ["YOUTUBE_API_KEY"]
-youtube = build("youtube","v3",developerKey=API_KEY)
+youtube = build("youtube", "v3", developerKey=API_KEY)
+
 def isVocaloTitle(title):
     
     if re.match('.*オリジナル曲.*',title):
@@ -57,10 +58,10 @@ def crawlOrderByRelevance(word, video_duration, published_after, published_befor
     ).execute()
     return search_response
 
-def getViewCount(video):
+def getViewCount(video_id):
     response = youtube.videos().list(
         part="statistics",
-        id=video["id"]["videoId"],
+        id=video_id,
     ).execute()
     video = response["items"][0]
     view_count = video["statistics"]["viewCount"]
@@ -105,12 +106,12 @@ def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_v
     while True:
         counter += 1 
         for video in videos:
-            view_count = getViewCount(video)
+            view_count = getViewCount(video["id"]["videoId"])
             if view_count < filter_view_count:
                 finished = True
                 break
             if DB.isAlreadyInsertedItem(table_name, video):
-                DB.updateViewCount(table_name,video,view_count)
+                DB.updateViewCount(table_name,video["id"]["videoId"],view_count)
                 continue
 
             if is_utattemita:
@@ -164,11 +165,11 @@ def crawlOrderByRelevanceAndInsertToDB(table_name, word, is_utattemita, video_du
     search_response = crawlOrderByRelevance(word, video_duration,published_after,published_before)
     videos = search_response["items"]
     for video in videos:
-        view_count = getViewCount(video)
+        view_count = getViewCount(video["id"]["videoId"])
         if view_count < filter_view_count:
             continue
         if DB.isAlreadyInsertedItem(table_name, video):
-            DB.updateViewCount(table_name,video,view_count)
+            DB.updateViewCount(table_name,video["id"]["videoId"],view_count)
             continue
 
         if is_utattemita:
@@ -220,12 +221,12 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
     finished = False
     while True:
         for video in videos:
-            view_count = getViewCount(video)
+            view_count = getViewCount(video["id"]["videoId"])
             if view_count < filter_view_count:
                 finished = True
                 break
             if DB.isAlreadyInsertedItem(table_name, video):
-                DB.updateViewCount("famous_vocalovideos",video,view_count)
+                DB.updateViewCount("famous_vocalovideos",video["id"]["videoId"],view_count)
                 continue
 
             if isVocaloTitle(video["snippet"]["title"]):
@@ -237,3 +238,12 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
     
 
     DB.commit()
+
+def updateAllViewCountInFamousVocaloVideos():
+    rows = DB.getAllVideoIdFromFamousVocaloVideos()
+    for row in rows:
+        video_id = row[0]
+        view_count = getViewCount(video_id)
+        DB.updateViewCount("famous_vocalovideos", video_id, view_count)
+    DB.commit()
+    DB.disconnect()

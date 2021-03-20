@@ -71,14 +71,19 @@ def deleteOldData(table_name):
         elif table_name == "recently_famous_utattemita":
             cur.execute("DELETE FROM recently_famous_utattemita ORDER BY published_at LIMIT %s", (delete_num,))
 
-def updateViewCount(table_name, video, view_count):
+def updateViewCount(table_name, video_id, view_count):
     if table_name == "recently_famous_vocalovideos":
-        cur.execute("UPDATE recently_famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
+        cur.execute("UPDATE recently_famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video_id))
     elif table_name == "recently_famous_utattemita":
-        cur.execute("UPDATE recently_famous_utattemita SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
+        cur.execute("UPDATE recently_famous_utattemita SET view_count=%s WHERE video_id=%s",(view_count,video_id))
     elif table_name == "famous_vocalovideos":
-        cur.execute("UPDATE famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video["id"]["videoId"]))
-    
+        cur.execute("UPDATE famous_vocalovideos SET view_count=%s WHERE video_id=%s",(view_count,video_id))
+
+def getAllVideoIdFromFamousVocaloVideos():
+    cur.execute("SELECT video_id FROM famous_vocalovideos")
+    rows = cur.fetchall()
+    return rows
+        
 def insertToNotVocalovideosAndDelete(video_id):
     cur.execute("SELECT video_id FROM not_vocalovideos WHERE video_id = %s", (video_id,))
     if cur.fetchone():
