@@ -16,7 +16,7 @@ def isVocaloTitle(title):
     
     if re.match('.*オリジナル曲.*',title):
         return True
-    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd|mad|カラオケ|真似).*',re.IGNORECASE)
+    notVocaloPattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd|mad|カラオケ|真似|プロセカ).*',re.IGNORECASE)
     if notVocaloPattern.match(title):
         return False
     if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
@@ -31,25 +31,34 @@ def isUtatteMitaTitle(title):
         return True
     return False
 
+def crawl(word, video_duration, published_after, published_before, page_token=None, order_by="viewCount"):
+    """
+    YouTubeから検索結果を取得するメソッド
 
-def crawl(word, video_duration, published_after, published_before, page_token=None):
+    Parameters
+    ----------
+    word : string
+        検索ワード
+
+    video_duration : string
+        動画の種類分け
+        short 4分未満
+        medium 4分以上20分以下
+
+    published_after : datetime
+        指定した日時より後に作成された動画を返す
+    
+    published_before : datetime
+        指定した日時より前に作成された動画を返す
+
+    page_token : string
+        検索結果の次のページを取得する際に設定する。例)page_token=search_response["nextPageToken"]
+    """
     search_response = youtube.search().list(
         part="id,snippet",
         q=word,
         pageToken=page_token,
-        order="viewCount",
-        type="video",
-        maxResults=50,
-        videoDuration=video_duration,
-        publishedAfter=published_after,
-        publishedBefore=published_before
-    ).execute()
-    return search_response
-
-def crawlOrderByRelevance(word, video_duration, published_after, published_before):
-    search_response = youtube.search().list(
-        part="id,snippet",
-        q=word,
+        order=order_by,
         type="video",
         maxResults=50,
         videoDuration=video_duration,
@@ -69,7 +78,7 @@ def getViewCount(video_id):
 
 def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_view_count, published_after=None, published_before=None,must_disconnect_db=False):
     """
-    再生回数の検索結果を指定したテーブルに挿入する。テーブルが整理対象であれば同時に整理も行う
+    再生回数順の検索結果を指定したテーブルに挿入する。100件まで。テーブルが整理対象であれば同時に整理も行う
 
     Parameters
     ----------
@@ -110,7 +119,7 @@ def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_v
             if view_count < filter_view_count:
                 finished = True
                 break
-            if DB.isAlreadyInsertedItem(table_name, video):
+            if DB.isAlreadyInsertedItem(table_name, video["id"]["videoId"]):
                 DB.updateViewCount(table_name,video["id"]["videoId"],view_count)
                 continue
 
@@ -132,7 +141,7 @@ def crawlAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_v
 
 def crawlOrderByRelevanceAndInsertToDB(table_name, word, is_utattemita, video_duration, filter_view_count, published_after=None, published_before=None,must_disconnect_db=False):
     """
-    再生回数の検索結果を指定したテーブルに挿入する。テーブルが整理対象であれば同時に整理も行う
+    関連度順の検索結果を指定したテーブルに挿入する。50件まで。テーブルが整理対象であれば同時に整理も行う
 
     Parameters
     ----------
@@ -162,13 +171,13 @@ def crawlOrderByRelevanceAndInsertToDB(table_name, word, is_utattemita, video_du
     must_disconnect_db : bool
         DBの切断を行うかどうか
     """
-    search_response = crawlOrderByRelevance(word, video_duration,published_after,published_before)
+    search_response = crawl(word, video_duration,published_after,published_before,order_by="relevance")
     videos = search_response["items"]
     for video in videos:
         view_count = getViewCount(video["id"]["videoId"])
         if view_count < filter_view_count:
             continue
-        if DB.isAlreadyInsertedItem(table_name, video):
+        if DB.isAlreadyInsertedItem(table_name, video["id"]["videoId"]):
             DB.updateViewCount(table_name,video["id"]["videoId"],view_count)
             continue
 
@@ -184,11 +193,9 @@ def crawlOrderByRelevanceAndInsertToDB(table_name, word, is_utattemita, video_du
 
 def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_duration, filter_view_count, published_after=None, published_before=None):
     """
-    基本的にcrawlAndInsertToDBと処理は同じ\r\n
-    差分：must_disconnect_dbがない。クロールするページの上限を無くした\r\n
-    DB切断は使う側が行う必要がある\r\n
+    歴代ボカロランキングを更新するためのメソッド。DB切断は使う側が行う必要がある\r\n
+    クロールするページの上限がない。テーブルの整理は行わない\r\n
     実行する日程は決めて通常のクローリングと別の日に行ったほうがよい、使用するクォータは800程度\r\n
-    再生回数の検索結果を指定したテーブルに挿入する。テーブルが整理対象であれば同時に整理も行う
 
     Parameters
     ----------
@@ -225,7 +232,7 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
             if view_count < filter_view_count:
                 finished = True
                 break
-            if DB.isAlreadyInsertedItem(table_name, video):
+            if DB.isAlreadyInsertedItem(table_name, video["id"]["videoId"]):
                 DB.updateViewCount("famous_vocalovideos",video["id"]["videoId"],view_count)
                 continue
 
@@ -238,7 +245,7 @@ def crawlAndInsertFamousVocalovideosToDB(table_name, word, is_utattemita, video_
     
 
     DB.commit()
-
+    
 def updateAllViewCountInFamousVocaloVideos():
     rows = DB.getAllVideoIdFromFamousVocaloVideos()
     for row in rows:

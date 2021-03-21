@@ -14,8 +14,9 @@ conn = mysql.connector.connect(
 )
 cur = conn.cursor()
 date_format = re.compile('\d+-\d+-\d+')
+
 def insertVideo(table_name, video, view_count):
-    if isAlreadyInsertedItem('not_vocalovideos', video):
+    if isAlreadyInsertedItem('not_vocalovideos', video["id"]["videoId"]):
         return
     #mysqlの8.023ではYouTubeから取得した日付のフォーマットでいれようとするとエラーを出されるためフォーマット調整
     published_at = date_format.match(video["snippet"]["publishedAt"]).group()
@@ -31,15 +32,14 @@ def insertVideo(table_name, video, view_count):
         cur.execute("INSERT INTO famous_vocalovideos VALUES (%(video_id)s,%(title)s,%(view_count)s,%(published_at)s,%(insert_at)s)",
         {"video_id": video["id"]["videoId"], "title": video["snippet"]["title"], "view_count": view_count, "published_at": published_at,'insert_at':datetime.datetime.today().strftime("%Y-%m-%d")})
 
-
-def isAlreadyInsertedItem(table_name, video):
+def isAlreadyInsertedItem(table_name, video_id):
     #テーブル名によるテーブル切り替え処理
     if table_name == "recently_famous_vocalovideos":
-        cur.execute("SELECT video_id FROM recently_famous_vocalovideos WHERE video_id = %s", (video["id"]["videoId"],))
+        cur.execute("SELECT video_id FROM recently_famous_vocalovideos WHERE video_id = %s", (video_id,))
     elif table_name == "recently_famous_utattemita":
-        cur.execute("SELECT video_id FROM recently_famous_utattemita WHERE video_id = %s", (video["id"]["videoId"],))
+        cur.execute("SELECT video_id FROM recently_famous_utattemita WHERE video_id = %s", (video_id,))
     elif table_name == "famous_vocalovideos":
-        cur.execute("SELECT video_id FROM famous_vocalovideos WHERE video_id = %s", (video["id"]["videoId"],))
+        cur.execute("SELECT video_id FROM famous_vocalovideos WHERE video_id = %s", (video_id,))
 
     if cur.fetchone():
         return True
@@ -48,11 +48,6 @@ def isAlreadyInsertedItem(table_name, video):
 def deleteOldData(table_name):
     """
     指定したテーブルのレコード数が100になるよう古いデータを消去する。テーブルが整理対象でなければ処理を行わない
-
-    Parameters
-    ----------
-    table_name : string
-        データを削除するテーブル名
     """
     #整理対象ではないテーブル
     if table_name == "famous_vocalovideos":
@@ -85,11 +80,16 @@ def getAllVideoIdFromFamousVocaloVideos():
     return rows
         
 def insertToNotVocalovideosAndDelete(video_id):
+    """
+    検索条件に引っかかるがボカロではない動画を歴代ボカロランキングテーブルから削除する\r\n
+    同時にボカロでない動画を集めるテーブルに入れ、以降は歴代ボカロランキングに入れないようにする\r\n
+    """
     cur.execute("SELECT video_id FROM not_vocalovideos WHERE video_id = %s", (video_id,))
     if cur.fetchone():
         return
     cur.execute("DELETE FROM famous_vocalovideos WHERE video_id = %s",(video_id,))
     cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
+
 def commit():
     conn.commit()
 
