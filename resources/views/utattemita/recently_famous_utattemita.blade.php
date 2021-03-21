@@ -49,7 +49,7 @@
         </div>
     @endfor
     <?php $queries = array();
-        htmlspecialchars($sort) == 0 ? : $queries['sort'] = htmlspecialchars($sort);
+        if(htmlspecialchars($sort) != 0 ) $queries['sort'] = htmlspecialchars($sort);
     ?>
     {{$utattemita->appends($queries)->links('vendor.pagination.original_pagination_view')}}
 @endsection
