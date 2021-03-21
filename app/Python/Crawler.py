@@ -4,11 +4,11 @@ import os
 from apiclient.discovery import build
 import datetime
 from dateutil.relativedelta import relativedelta
-import EnvSetter
+import EnvLoader
 import DB
 
 
-EnvSetter.setEnv()
+EnvLoader.loadEnv()
 API_KEY = os.environ["YOUTUBE_API_KEY"]
 youtube = build("youtube", "v3", developerKey=API_KEY)
 

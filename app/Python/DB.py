@@ -1,10 +1,10 @@
 # coding: UTF-8
 import mysql.connector
 import os
-import EnvSetter
+import EnvLoader
 import re
 import datetime
-EnvSetter.setEnv()
+EnvLoader.loadEnv()
 conn = mysql.connector.connect(
     host=os.environ["DB_HOST"],
     port=os.environ["DB_PORT"],
