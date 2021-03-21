@@ -79,13 +79,12 @@ def getAllVideoIdFromFamousVocaloVideos():
     rows = cur.fetchall()
     return rows
         
-def insertToNotVocalovideosAndDelete(video_id):
+def deleteAndInsertToNotVocalovideos(video_id):
     """
     検索条件に引っかかるがボカロではない動画を歴代ボカロランキングテーブルから削除する\r\n
     同時にボカロでない動画を集めるテーブルに入れ、以降は歴代ボカロランキングに入れないようにする\r\n
     """
-    cur.execute("SELECT video_id FROM not_vocalovideos WHERE video_id = %s", (video_id,))
-    if cur.fetchone():
+    if isAlreadyInsertedItem("not_vocalovideos",video_id):
         return
     cur.execute("DELETE FROM famous_vocalovideos WHERE video_id = %s",(video_id,))
     cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
@@ -98,6 +97,6 @@ def disconnect():
     conn.disconnect()
 
 if __name__ == "__main__":
-    insertToNotVocalovideosAndDelete("o1WXFxHXieM")
+    deleteAndInsertToNotVocalovideos("o1WXFxHXieM")
     commit()
     disconnect()
