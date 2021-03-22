@@ -31,8 +31,6 @@ def get_safe_table_name(table_name):
     else:
         return None
 
-
-
 def is_inserted_item(table_name, video_id):
     table_name = get_safe_table_name(table_name)
     sql = "SELECT video_id FROM {} WHERE video_id = %s".format(table_name)
@@ -86,7 +84,6 @@ def delete_and_insert_into_not_vocalovideos(video_id):
         return
     cur.execute("DELETE FROM famous_vocalovideos WHERE video_id = %s",(video_id,))
     cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
-    commit()
 
 def commit():
     conn.commit()

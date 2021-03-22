@@ -12,3 +12,4 @@ npm-debug.log
 yarn-error.log
 *.pyc
 app/Python/manual_action.py
+app/Python/TestCode/
