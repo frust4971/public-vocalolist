@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddInsertAtToFamousVocalovideosTable extends Migration
+class AddInsertAtToRecentlyFamousUtattemita extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddInsertAtToFamousVocalovideosTable extends Migration
      */
     public function up()
     {
-        Schema::table('famous_vocalovideos', function (Blueprint $table) {
+        Schema::table('recently_famous_utattemita', function (Blueprint $table) {
             $table->timestamp('insert_at')->useCurrent()->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddInsertAtToFamousVocalovideosTable extends Migration
      */
     public function down()
     {
-        Schema::table('famous_vocalovideos', function (Blueprint $table) {
+        Schema::table('recently_famous_utattemita', function (Blueprint $table) {
             $table->dropColumn('insert_at');
         });
     }

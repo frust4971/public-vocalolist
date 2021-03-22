@@ -4,9 +4,8 @@ import os
 import datetime
 from dateutil.relativedelta import relativedelta
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import Crawler
-import DB
+import crawler
 
 
 if __name__ == "__main__":
-    Crawler.updateAllViewCountInFamousVocaloVideos()
+    crawler.update_all_view_count_in_famous_vocalovideos()
