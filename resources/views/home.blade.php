@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="display-if-under-lg">
-                        <div class="row d-xl-none d-block">
+                        <div class="row d-lg-none d-block">
                             <div class="embed-responsive embed-responsive-16by9 carousel-grid col-12">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_vocalovideos[$i]->video_id}}"></iframe>
                             </div>
@@ -83,7 +83,7 @@
 
                     </div>
                     <div class="display-if-under-lg">
-                        <div class="row d-xl-none d-block">
+                        <div class="row d-lg-none d-block">
                             <div class="embed-responsive embed-responsive-16by9 carousel-grid col-12">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_utattemita[$i]->video_id}}"></iframe>
                             </div>
