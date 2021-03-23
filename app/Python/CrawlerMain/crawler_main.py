@@ -6,7 +6,7 @@ from dateutil.relativedelta import relativedelta
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import crawler
 
-#データベースを新規作成後実行するクラス
+
 if __name__ == "__main__":
     #最近話題のボカロを集める
     recently_vocalo_published_after = (datetime.datetime.today() + relativedelta(months=-6)).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
