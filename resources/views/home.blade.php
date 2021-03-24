@@ -26,6 +26,7 @@
                 <li data-target="#carouselVocalovideosIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
+            <div class="row">
             @for($i = 0; $i < 3; $i++)
                 <div class="carousel-item {{$i == 0 ? 'active' : NULL}}">
                     <div class="display-if-lg-or-more">
@@ -46,7 +47,7 @@
                     </div>
                 </div>
             @endfor
-
+            </div>
             </div>
             <a class="carousel-control-prev" href="#carouselVocalovideosIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -70,10 +71,11 @@
                 <li data-target="#carouselUtattemitaIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
+            <div class="row">
             @for($i = 0; $i < 3; $i++)
                 <div class="carousel-item {{$i == 0 ? 'active' : NULL}}">
                     <div class="display-if-lg-or-more">
-                        <div class="row d-none d-lg-flex">
+                        <div class="d-none d-lg-flex">
                         @for($j = $i * 3; $j < ($i + 1) * 3; $j++)
                             <div class="embed-responsive embed-responsive-16by9 carousel-grid col-4">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_utattemita[$j]->video_id}}"></iframe>
@@ -83,7 +85,7 @@
 
                     </div>
                     <div class="display-if-under-lg">
-                        <div class="row d-lg-none d-block">
+                        <div class="d-lg-none d-block">
                             <div class="embed-responsive embed-responsive-16by9 carousel-grid col-12">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_utattemita[$i]->video_id}}"></iframe>
                             </div>
@@ -91,7 +93,7 @@
                     </div>
                 </div>
             @endfor
-
+            </div>
 
             </div>
             <a class="carousel-control-prev" href="#carouselUtattemitaIndicators" role="button" data-slide="prev">
