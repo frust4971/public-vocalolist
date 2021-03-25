@@ -17,7 +17,7 @@
 </div>
 <br>
 <div class="card">
-    <a class="text-dark" href="{{route('vocalo.recently_famous_vocalovideos')}}"><div class="card-header"><b>最近話題のボカロ曲</b></div></a>
+    <a class="text-dark" href="{{route('vocalo.recently_famous_vocalovideos')}}"><div class="card-header"><b>最近話題のボカロ</b></div></a>
     <div class="card-body">
     <div id="carouselVocalovideosIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
