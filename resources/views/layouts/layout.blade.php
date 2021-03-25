@@ -33,6 +33,7 @@
     </style>
     @yield('title')
     @yield('description')
+    @yield('style')
 </head>
 
 <body>
