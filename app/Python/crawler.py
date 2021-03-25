@@ -24,7 +24,7 @@ def is_vocalo_title(title):
     return False
 
 def is_utattemita_title(title):
-    not_utattemita_pattern = re.compile('.*(ランキング|メドレー|替え歌|再生|feat|検定|クイズ|テスト|ボカロ曲|ft.).*',re.IGNORECASE)
+    not_utattemita_pattern = re.compile('.*(ランキング|メドレー|替え歌|再生|feat|検定|クイズ|テスト|ボカロ曲|ft.|OP).*',re.IGNORECASE)
     if not_utattemita_pattern.match(title):
         return False
     if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
