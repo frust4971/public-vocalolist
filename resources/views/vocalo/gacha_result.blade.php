@@ -7,7 +7,7 @@
 @endsection
 @section('contents')
 <div class="row">
-        <div class="ml-4 mt-2">
+        <div class="ml-lg-4 mt-4 col-lg-6">
             <h2>ガチャ結果</h2>
         </div>
     </div>
