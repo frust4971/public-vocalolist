@@ -41,7 +41,7 @@
 
             <div class="row">
                 <div class="col-lg-1 col-0"></div>
-                <h2 class="col-lg-6 bg-light py-2 border-left border-primary">{{$utattemita[$i]->title}}</h2>
+                <h2 class="col-lg-6 bg-light py-2 border-left border-primary">{{htmlspecialchars_decode($utattemita[$i]->title)}}</h2>
             </div>
             <div class="row">
 
