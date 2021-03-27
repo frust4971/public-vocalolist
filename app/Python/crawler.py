@@ -222,7 +222,6 @@ def crawl_and_insert_famous_vocalovideos_into_db(table_name, word, is_utattemita
     published_before : datetime
         指定した日時より前に作成された動画を返す
     """
-    table_name = table_name
     search_response = crawl(word, video_duration,published_after,published_before)
     videos = search_response["items"]
     finished = False
@@ -233,7 +232,7 @@ def crawl_and_insert_famous_vocalovideos_into_db(table_name, word, is_utattemita
                 finished = True
                 break
             if db.is_inserted_item(table_name, video["id"]["videoId"]):
-                db.update_view_count("famous_vocalovideos",video["id"]["videoId"],view_count)
+                db.update_view_count(table_name,video["id"]["videoId"],view_count)
                 continue
 
             if is_vocalo_title(video["snippet"]["title"]):
