@@ -16,7 +16,7 @@ def is_vocalo_title(title):
     
     if re.match('.*オリジナル曲.*',title):
         return True
-    not_vocalo_pattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd|mad|カラオケ|真似|プロセカ|ライブ).*',re.IGNORECASE)
+    not_vocalo_pattern = re.compile('.*(歌|cover|演奏|メドレー|ランキング|再生|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd|mad|カラオケ|真似|プロセカ|ライブ|なボカロ).*',re.IGNORECASE)
     if not_vocalo_pattern.match(title):
         return False
     if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
