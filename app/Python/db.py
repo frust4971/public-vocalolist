@@ -29,7 +29,7 @@ def get_safe_table_name(table_name):
     elif table_name == "not_vocalovideos":
         return "not_vocalovideos"
     else:
-        return None
+        raise ValueError("テーブル名が適切ではありません")
 
 def is_inserted_item(table_name, video_id):
     table_name = get_safe_table_name(table_name)
@@ -91,5 +91,4 @@ def commit():
 def disconnect():
     cur.close()
     conn.disconnect()
-
 
