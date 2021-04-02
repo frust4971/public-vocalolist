@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-<title>VocaloList|このサイトについて</title>
+<title>このサイトについて|VocaloList</title>
 @endsection
 
 @section('style')
