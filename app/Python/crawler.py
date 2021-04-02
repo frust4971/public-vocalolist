@@ -16,7 +16,7 @@ def is_vocalo_title(title):
     
     if re.match('.*オリジナル曲.*',title):
         return True
-    not_vocalo_pattern = '.*(歌|cover|演奏|メドレー|ランキング|再生|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd|mad|カラオケ|真似|プロセカ|ライブ|なボカロ|top).*'
+    not_vocalo_pattern = '.*(歌|cover|演奏|メドレー|ランキング|再生|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd|mad|カラオケ|真似|プロセカ|ライブ|なボカロ|top|手描き).*'
     if re.match(not_vocalo_pattern,title,re.IGNORECASE):
         return False
     if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
@@ -24,7 +24,7 @@ def is_vocalo_title(title):
     return False
 
 def is_utattemita_title(title):
-    not_utattemita_pattern = '.*(ランキング|メドレー|替え歌|再生|feat|検定|クイズ|テスト|ボカロ曲|ft.|OP|なボカロ|official|演奏|ボカロP|top|MV|movie|踊ってみた).*'
+    not_utattemita_pattern = '.*(ランキング|メドレー|替え歌|再生|feat|検定|クイズ|テスト|ボカロ曲|ft.|OP|なボカロ|official|演奏|ボカロP|top|MV|movie|踊ってみた|手描き).*'
     if re.match(not_utattemita_pattern,title,re.IGNORECASE):
         return False
     if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
