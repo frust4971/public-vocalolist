@@ -8,15 +8,6 @@
 @section('contents')
 <br>
 <div class="card">
-    <div class="card-header">
-        <b>お知らせ</b>
-    </div>
-    <div class="card-body">
-        <a class="text-dark" href="{{route('info.about_site')}}">このサイトについて</a>
-    </div>
-</div>
-<br>
-<div class="card">
     <a class="text-dark" href="{{route('vocalo.recently_famous_vocalovideos')}}"><div class="card-header"><b>最近話題のボカロ</b></div></a>
     <div class="card-body">
     <div id="carouselVocalovideosIndicators" class="carousel slide" data-ride="carousel">
@@ -133,6 +124,15 @@
     <div class="card-body">
         <p>お前らのオススメ曲教えろ(12)</p>
         <p>※まだ掲示板は作成していません。今後こんな感じにする予定です</p>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+        <b>お知らせ</b>
+    </div>
+    <div class="card-body">
+        <a class="text-dark" href="{{route('info.about_site')}}">このサイトについて</a>
     </div>
 </div>
 <br>
