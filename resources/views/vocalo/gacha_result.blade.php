@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-<title>ボカロガチャ結果|VocaloList</title>
+<title>ボカロガチャ結果 | VocaloList</title>
 @endsection
 @section('breadcrumbs')
 {{Breadcrumbs::render('vocalo.gacha_result')}}

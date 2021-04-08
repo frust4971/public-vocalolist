@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-<title>歴代ボカロランキング|VocaloList</title>
+<title>歴代ボカロランキング | VocaloList</title>
 @endsection
 @section('description')
 <meta name="description" content="YouTubeで公開されている歴史に名を刻んだボカロ曲をランキング形式で集めました。カラオケで歌うもよし、趣味で聴くのもよし。これだけ見ておけば間違いない！">

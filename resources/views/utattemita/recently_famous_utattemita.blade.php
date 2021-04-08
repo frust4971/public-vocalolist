@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-<title>最近話題のボカロ歌ってみた！| VocaloList</title>
+<title>最近話題のボカロ歌ってみた | VocaloList</title>
 @endsection
 @section('description')
 <meta name="description" content="YouTubeで再生回数10万越えの最近話題になっている歌ってみた動画を集めました。投稿日順やランキング順で見逃している動画がないか確認しよう！好みの歌い手に出会えるかもしれないぞ">

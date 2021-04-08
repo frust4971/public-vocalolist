@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-<title>ボカロガチャ|VocaloList</title>
+<title>ボカロガチャ | VocaloList</title>
 @endsection
 @section('description')
 <meta name="description" content="YouTubeで再生回数100万越えの超人気ボカロ曲でガチャ！まだあなたの知らないお気に入り曲を見つけられるかも知れない...見つけられなくても最近聴いてなかったあの曲をもう一度聴くのも面白いよ！">
