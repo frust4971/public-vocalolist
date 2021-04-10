@@ -59,14 +59,16 @@
 
 >>>>>>> 040c729 (divの数でバグがあった。修正)
             </div>
-            <a class="carousel-control-prev" href="#carouselVocalovideosIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselVocalovideosIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <div class="d-none d-sm-block">
+                <a class="carousel-control-prev h-25 my-auto" href="#carouselVocalovideosIndicators" role="button" data-slide="prev" style="width:60px">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next h-25 my-auto" href="#carouselVocalovideosIndicators" role="button" data-slide="next" style="width:60px">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -105,14 +107,16 @@
 
             @endfor
             </div>
-            <a class="carousel-control-prev" href="#carouselUtattemitaIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselUtattemitaIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <div class="d-none d-sm-block">
+                <a class="carousel-control-prev h-25 my-auto" href="#carouselUtattemitaIndicators" role="button" data-slide="prev" style="width:60px">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next h-25 my-auto" href="#carouselUtattemitaIndicators" role="button" data-slide="next" style="width:60px">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
