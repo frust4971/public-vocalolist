@@ -23,28 +23,36 @@ class NotFoundVideoException(Exception):
     def __str__(self):
         return "動画が見つかりませんでした"
 
+ng_word = re.compile('.*(ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|OP|なボカロ|演奏|ボカロP|top|踊ってみた|手描き|太鼓|弾い|人力|OP|mmd|mad|プロセカ|TV).*', re.IGNORECASE)
+japanese_pattern = re.compile('.*([亜-熙ぁ-んァ-ヶ]).*')
+
+vocalo_pattern = re.compile('.*オリジナル曲.*', re.IGNORECASE)
+not_vocalo_pattern = re.compile('.*(歌|cover|合唱|remix|曲|みた|バンド|反応|diva|カバー|カラオケ|真似|ライブ).*', re.IGNORECASE)
+
 def is_vocalo_title(title):
-    
-    if re.match('.*オリジナル曲.*',title):
-        return True
-    not_vocalo_pattern = '.*(歌|cover|演奏|メドレー|ランキング|再生|合唱|太鼓|remix|曲|弾い|みた|バンド|クイズ|反応|検定|テスト|人力|diva|カバー|cover|mmd|mad|カラオケ|真似|プロセカ|ライブ|なボカロ|top|手描き|TV).*'
-    if re.match(not_vocalo_pattern,title,re.IGNORECASE):
+    if ng_word.match(title):
         return False
-    if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
+    if vocalo_pattern.match(title):
+        return True
+    if not_vocalo_pattern.match(title):
+        return False
+    if japanese_pattern.match(title):
         return True
     return False
 
+not_utattemita_pattern = re.compile('.*(feat|ボカロ曲|ft.|official|MV|movie).*', re.IGNORECASE)
 def is_utattemita_title(title):
-    not_utattemita_pattern = '.*(ランキング|メドレー|替え歌|再生|feat|検定|クイズ|テスト|ボカロ曲|ft.|OP|なボカロ|official|演奏|ボカロP|top|MV|movie|踊ってみた|手描き).*'
-    if re.match(not_utattemita_pattern,title,re.IGNORECASE):
+    if ng_word.match(title):
         return False
-    if re.match('.*([亜-熙ぁ-んァ-ヶ]).*',title):
+    if not_utattemita_pattern.match(title):
+        return False
+    if japanese_pattern.match(title):
         return True
     return False
 
+not_vocalo_description_pattern = re.compile('.*(放送日|broadcast).*', re.IGNORECASE)
 def is_vocalo_description(description):
-    not_vocalo_pattern = '.*(放送日|broadcast).*'
-    if re.match(not_vocalo_pattern,description,re.IGNORECASE):
+    if not_vocalo_description_pattern.match(description):
         return False
     return True
 
@@ -248,3 +256,4 @@ def insert_into_db_by_id(table_name, video_id):
     video["id"]["videoId"] = video_id
     db.insert_video(table_name,video,int(video["statistics"]["viewCount"]))
     db.commit()
+
