@@ -4,6 +4,8 @@ import os
 import env
 import re
 import datetime
+import const
+
 env.load_env()
 conn = mysql.connector.connect(
     host=os.environ["DB_HOST"],
@@ -20,14 +22,14 @@ def get_safe_table_name(table_name):
     安全なテーブル名を返す\r\n
     テーブル名の埋め込みがプレースホルダーでは出来ないため必要
     """
-    if table_name == "recently_famous_vocalovideos":
-        return "recently_famous_vocalovideos"
-    elif table_name == "recently_famous_utattemita":
-        return "recently_famous_utattemita"
-    elif table_name == "famous_vocalovideos":
-        return "famous_vocalovideos"
-    elif table_name == "not_vocalovideos":
-        return "not_vocalovideos"
+    if table_name == const.RECENTLY_VOCALO_TABLE_NAME:
+        return const.RECENTLY_VOCALO_TABLE_NAME
+    elif table_name == const.RECENTLY_UTATTEMIATA_TABLE_NAME:
+        return const.RECENTLY_UTATTEMIATA_TABLE_NAME
+    elif table_name == const.FAMOUS_VOCALO_TABLE_NAME:
+        return const.FAMOUS_VOCALO_TABLE_NAME
+    elif table_name == const.NOT_VOCALO_TABLE_NAME:
+        return const.NOT_VOCALO_TABLE_NAME
     else:
         raise ValueError("テーブル名が適切ではありません")
 
@@ -53,7 +55,7 @@ def delete_old_data(table_name):
     指定したテーブルのレコード数が100になるよう古いデータを消去する。テーブルが整理対象でなければ処理を行わない
     """
     #整理対象ではないテーブル
-    if table_name == "famous_vocalovideos":
+    if table_name == const.FAMOUS_VOCALO_TABLE_NAME:
         return
     table_name = get_safe_table_name(table_name)
     sql = "SELECT COUNT(*) FROM {}".format(table_name)
@@ -70,20 +72,30 @@ def update_view_count(table_name, video_id, view_count):
     sql = "UPDATE {} SET view_count=%s WHERE video_id=%s".format(table_name)
     cur.execute(sql,(view_count,video_id))
 
-def get_all_video_id_from_famous_vocalovideos():
-    cur.execute("SELECT video_id FROM famous_vocalovideos")
+def get_all_video_id(table_name):
+    table_name = get_safe_table_name(table_name)
+    sql = "SELECT video_id FROM {}".format(table_name)
+    cur.execute(sql)
     rows = cur.fetchall()
     return rows
         
-def delete_and_insert_into_not_vocalovideos(video_id):
+def delete_and_insert_into_not_vocalovideos(table_name,video_id):
     """
-    検索条件に引っかかるがボカロではない動画を歴代ボカロランキングテーブルから削除する\r\n
-    同時にボカロでない動画を集めるテーブルに入れ、以降は歴代ボカロランキングに入れないようにする\r\n
+    検索条件に引っかかるがボカロではない動画をテーブルから削除する\r\n
+    同時にボカロでない動画を集めるテーブルに入れ、以降はテーブルに入れないようにする\r\n
     """
-    if is_inserted_item("not_vocalovideos",video_id):
+    if is_inserted_item(const.NOT_VOCALO_TABLE_NAME,video_id):
         return
-    cur.execute("DELETE FROM famous_vocalovideos WHERE video_id = %s",(video_id,))
+    
+    table_name = get_safe_table_name(table_name)
+    sql = "DELETE FROM {} WHERE video_id = %s".format(table_name)
+    cur.execute(sql,(video_id,))
     cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
+
+def delete_video(table_name,video_id):
+    table_name = get_safe_table_name(table_name)
+    sql = "DELETE FROM {} WHERE video_id = %s".format(table_name)
+    cur.execute(sql,(video_id,))
 
 def commit():
     conn.commit()

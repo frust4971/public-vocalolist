@@ -6,6 +6,7 @@ from dateutil.relativedelta import relativedelta
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import crawler
 import db
+import const
 
 
 if __name__ == "__main__":
@@ -13,6 +14,6 @@ if __name__ == "__main__":
     published_before = (datetime.datetime.today()).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     researchWords = ["vocaloid", "ボカロ", "ボカロ feat", "ボカロ　ミク", "ボカロ　レン","ボカロ Lily","ボカロ　KAITO","ボカロ　miki","ボカロ　mayu"]
     for researchWord in researchWords:
-        crawler.crawl_and_insert_famous_vocalovideos_into_db("famous_vocalovideos", researchWord, False, "short", 1000000,published_after,published_before)
-        crawler.crawl_and_insert_famous_vocalovideos_into_db("famous_vocalovideos", researchWord, False, "medium", 1000000,published_after,published_before)
+        crawler.crawl_and_insert_famous_vocalovideos_into_db(const.FAMOUS_VOCALO_TABLE_NAME, researchWord, "short", 1000000,published_after,published_before)
+        crawler.crawl_and_insert_famous_vocalovideos_into_db(const.FAMOUS_VOCALO_TABLE_NAME, researchWord, "medium", 1000000,published_after,published_before)
     db.disconnect()
