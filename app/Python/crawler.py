@@ -23,11 +23,11 @@ class NotFoundVideoException(Exception):
     def __str__(self):
         return "動画が見つかりませんでした"
 
-ng_word = re.compile('.*(ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|OP|なボカロ|演奏|ボカロP|top|踊ってみた|手描き|太鼓|弾い|人力|OP|mmd|mad|プロセカ|TV).*', re.IGNORECASE)
+ng_word = re.compile('.*(ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|OP|なボカロ|演奏|ボカロP|top|踊ってみた|手描き|太鼓|弾い|人力|OP|mmd|mad|プロセカ|TV|ピアノ|combo|プロモ|コスプレ).*', re.IGNORECASE)
 japanese_pattern = re.compile('.*([亜-熙ぁ-んァ-ヶ]).*')
 
 vocalo_pattern = re.compile('.*オリジナル曲.*', re.IGNORECASE)
-not_vocalo_pattern = re.compile('.*(歌|cover|合唱|remix|曲|みた|バンド|反応|diva|カバー|カラオケ|真似|ライブ).*', re.IGNORECASE)
+not_vocalo_pattern = re.compile('.*(歌|cover|合唱|remix|曲|みた|バンド|反応|diva|カバー|カラオケ|真似|ライブ|コラボ).*', re.IGNORECASE)
 
 def is_vocalo_title(title):
     if ng_word.match(title):
@@ -50,7 +50,7 @@ def is_utattemita_title(title):
         return True
     return False
 
-not_vocalo_description_pattern = re.compile('.*(放送日|broadcast).*', re.IGNORECASE)
+not_vocalo_description_pattern = re.compile('.*(放送日|broadcast|コスプレ).*', re.IGNORECASE)
 def is_vocalo_description(description):
     if not_vocalo_description_pattern.match(description):
         return False
