@@ -10,7 +10,7 @@
 <div class="card">
     <a class="text-dark" href="{{route('vocalo.recently_famous_vocalovideos')}}"><div class="card-header"><b>最近話題のボカロ</b></div></a>
     <div class="card-body">
-    <div id="carouselVocalovideosIndicators" class="carousel slide" data-ride="carousel" data-touch=true>
+    <div id="carouselVocalovideosIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselVocalovideosIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselVocalovideosIndicators" data-slide-to="1"></li>
@@ -74,7 +74,7 @@
 <div class="card">
     <a class="text-dark" href="{{route('utattemita.recently_famous_utattemita')}}"><div class="card-header"><b>最近話題の歌ってみた</b></div></a>
     <div class="card-body">
-        <div id="carouselUtattemitaIndicators" class="carousel slide" data-ride="carousel" data-touch=true>
+        <div id="carouselUtattemitaIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselUtattemitaIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselUtattemitaIndicators" data-slide-to="1"></li>
