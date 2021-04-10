@@ -135,9 +135,11 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
     must_disconnect_db : bool
         DBの切断を行うかどうか
     """
+    is_utattemita_table = table_name == const.RECENTLY_UTATTEMIATA_TABLE_NAME
     counter = 0
-    is_max_count = False
     num_search = max_results - 50 * counter
+    if num_search > 50:
+        num_search = 50
     search_response = crawl(word, video_duration, published_after, published_before,order_by=order_by,max_results=num_search)
     videos = search_response["items"]
     finished = False
@@ -150,7 +152,7 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
             if db.is_inserted_item(table_name, video["id"]["videoId"]):
                 continue
 
-            if table_name == const.RECENTLY_UTATTEMIATA_TABLE_NAME:
+            if is_utattemita_table:
                 if is_utattemita_title(video["snippet"]["title"]):
                     db.insert_video(table_name, video, view_count)
             elif is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video["snippet"]["description"]):
@@ -162,6 +164,8 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
 
         counter += 1 
         num_search = max_results - 50 * counter
+        if num_search > 50:
+            num_search = 50
         search_response = crawl(word, video_duration,published_after,published_before,order_by=order_by,page_token=search_response["nextPageToken"],max_results=num_search)
         videos = search_response["items"]
     
