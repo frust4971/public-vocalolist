@@ -107,7 +107,7 @@ def get_view_count(video_id):
     view_count = video["statistics"]["viewCount"]
     return int(view_count)
 
-def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count, published_after=None, published_before=None,max_results=50,order_by="viewCount",must_disconnect_db=False):
+def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count, published_after=None, published_before=None,num_search=50,order_by="viewCount",must_disconnect_db=False):
     """
     再生回数順の検索結果を指定したテーブルに挿入する。テーブルが整理対象であれば同時に整理も行う
 
@@ -145,10 +145,10 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
     """
     is_utattemita_table = table_name == const.RECENTLY_UTATTEMIATA_TABLE_NAME
     counter = 0
-    num_search = max_results - 50 * counter
-    if num_search > 50:
-        num_search = 50
-    search_response = crawl(word, video_duration, published_after, published_before,order_by=order_by,max_results=num_search)
+    max_results = num_search - 50 * counter
+    if max_results > 50:
+        max_results = 50
+    search_response = crawl(word, video_duration, published_after, published_before,order_by=order_by,max_results=max_results)
     videos = search_response["items"]
     finished = False
     while True:
@@ -165,16 +165,15 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
                     db.insert_video(table_name, video, view_count)
             elif is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video["snippet"]["description"]):
                 db.insert_video(table_name, video, view_count)
-
-        finished = finished or num_search < 50
-        if finished:
+        
+        if finished or max_results < 50:
             break
 
         counter += 1 
-        num_search = max_results - 50 * counter
-        if num_search > 50:
-            num_search = 50
-        search_response = crawl(word, video_duration,published_after,published_before,order_by=order_by,page_token=search_response["nextPageToken"],max_results=num_search)
+        max_results = num_search - 50 * counter
+        if max_results > 50:
+            max_results = 50
+        search_response = crawl(word, video_duration,published_after,published_before,order_by=order_by,page_token=search_response["nextPageToken"],max_results=max_results)
         videos = search_response["items"]
     
     db.delete_old_data(table_name)
