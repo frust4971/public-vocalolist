@@ -35,8 +35,6 @@
         ・<a class="text-dark" href="#utattemita">歌ってみた</a>
         <br>
         ・<a class="text-dark" href="#bulletin_board">掲示板</a>
-        <br>
-        ・<a class="text-dark" href="#plan">今後の予定</a>
     </div>
 </div>
 <br>
@@ -79,20 +77,6 @@
 
     <h3 id="bulletin_board">掲示板</h3><br>
     <p>いつかは作る予定です<br><br>今のデータベース（情報を入れておくところ）だと容量少なすぎて掲示板入れるのはぜーーーったいムリ！<br><br>人が集まってきて、性能のいいデータベース借りれるようになったら実装します</p>
-
-</div>
-<div class="content mb-5">
-
-    <h3 id="plan">今後の予定</h3><br>
-    <p>順番は特に決めてませんが今のところ以下のことをするつもりです</p>
-    <div class="card">
-        <div class="card-body">
-            <p>広告取得：金欠です。サーバー代をください</p>
-            <p>メールフォーム作成：訪問者さまさまの意見をきくのに必要</p>
-            <p>掲示板作成：あったら楽しいよね</p>
-            <p>ボカロの人気動画を年代で取得する機能の追加</p>
-        </div>
-    </div>
 
 </div>
 <br>
