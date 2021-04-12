@@ -40,7 +40,7 @@ def is_vocalo_title(title):
         return True
     return False
 
-not_utattemita_pattern = re.compile('.*(feat|ボカロ曲|ft.|official|MV|movie).*', re.IGNORECASE)
+not_utattemita_pattern = re.compile('.*(feat|ボカロ曲|ft.|official|MV|movie|歌い方).*', re.IGNORECASE)
 def is_utattemita_title(title):
     if ng_word.match(title):
         return False
