@@ -26,3 +26,7 @@ Breadcrumbs::for('info.about_site',function($trail){
     $trail->parent('home');
     $trail->push('このサイトについて',route('info.about_site'));
 });
+Breadcrumbs::for('contact',function($trail){
+    $trail->parent('home');
+    $trail->push('お問い合わせ',route('contact'));
+});

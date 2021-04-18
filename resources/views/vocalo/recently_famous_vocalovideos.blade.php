@@ -5,6 +5,9 @@
 @section('description')
 <meta name="description" content="YouTubeで再生回数10万越えの最近話題になっているボカロ曲を集めました。投稿日順やランキング順で見逃している曲がないか確認しよう！まだ見ぬ有名ボカロPに出会えるかもしれないぞ">
 @endsection
+@section('page_name')
+<?php $page_name = 'vocalo'?>
+@endsection
 @section('breadcrumbs')
 {{Breadcrumbs::render('vocalo.recently_famous_vocalovideos')}}
 @endsection

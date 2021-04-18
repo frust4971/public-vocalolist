@@ -24,3 +24,7 @@ Route::get('/vocalo/vocalo_gacha',function(){
 })->name('vocalo.vocalo_gacha');
 Route::get('/vocalo/gacha_result','VocaloGachaController@index')->name('vocalo.gacha_result');
 Route::get('/utattemita/recently_famous_utattemita','RecentlyFamousUtattemitaController@index')->name('utattemita.recently_famous_utattemita');
+Route::get('/contact',function(){
+    return view('contact');
+})->name('contact');
+Route::post('/contact','ContactFormController@post')->name('contact');

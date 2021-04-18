@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddInsertAtToRecentlyFamousUtattemita extends Migration
+class CreateMailUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddInsertAtToRecentlyFamousUtattemita extends Migration
      */
     public function up()
     {
-        Schema::table('recently_famous_utattemita', function (Blueprint $table) {
-            $table->timestamp('insert_at')->useCurrent()->nullable();
+        Schema::create('mail_users', function (Blueprint $table) {
+            $table->string('ip_address');
+            $table->primary('ip_address');
         });
     }
 
@@ -25,8 +26,6 @@ class AddInsertAtToRecentlyFamousUtattemita extends Migration
      */
     public function down()
     {
-        Schema::table('recently_famous_utattemita', function (Blueprint $table) {
-            $table->dropColumn('insert_at');
-        });
+        Schema::dropIfExists('mail_users');
     }
 }

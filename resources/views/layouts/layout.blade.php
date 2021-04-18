@@ -47,10 +47,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                @yield('page_name')
+                @if(!isset($page_name))
+                <?php $page_name = NULL ?>
+                @endif
+                <li class="nav-item {{$page_name == 'home'?'active':NULL}}">
                     <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item {{$page_name == 'vocalo'?'active':NULL}} dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ボカロ
                     </a>
@@ -60,11 +64,14 @@
                         <a class="dropdown-item" href="{{route('vocalo.vocalo_gacha')}}">ボカロガチャ</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{$page_name == 'utattemita'?'active':NULL}}">
                     <a class="nav-link" href="{{route('utattemita.recently_famous_utattemita')}}">歌ってみた</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">掲示板</a>
+                </li>
+                <li class="nav-item {{$page_name == 'contact'?'active':NULL}}">
+                    <a class="nav-link" href="{{route('contact')}}">お問い合わせ</a>
                 </li>
             </ul>
         </div>

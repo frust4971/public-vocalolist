@@ -97,6 +97,10 @@ def delete_video(table_name,video_id):
     sql = "DELETE FROM {} WHERE video_id = %s".format(table_name)
     cur.execute(sql,(video_id,))
 
+def reset_mail_users_table():
+    sql = "DELETE FROM {}".format(const.MAIL_USER_TABLE_NAME)
+    cur.execute(sql)
+
 def commit():
     conn.commit()
 

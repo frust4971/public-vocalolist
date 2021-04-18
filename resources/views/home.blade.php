@@ -5,6 +5,9 @@
 @section('description')
 <meta name="description" content="話題になっているボカロ曲や歌ってみた動画を毎日更新！歴代ランキングもあります。">
 @endsection
+@section('page_name')
+<?php $page_name = 'home'?>
+@endsection
 @section('contents')
 <br>
 <div class="card">
@@ -132,7 +135,8 @@
         <b>お知らせ</b>
     </div>
     <div class="card-body">
-        <a class="text-dark" href="{{route('info.about_site')}}">このサイトについて</a>
+        <a href="{{route('info.about_site')}}">このサイトについて</a>
+        <p>お問い合わせフォームを設置しました (2021/04/18)</p>
     </div>
 </div>
 <br>

@@ -2,9 +2,13 @@
 @section('title')
 <title>ボカロガチャ結果 | VocaloList</title>
 @endsection
+@section('page_name')
+<?php $page_name = 'vocalo'?>
+@endsection
 @section('breadcrumbs')
 {{Breadcrumbs::render('vocalo.gacha_result')}}
 @endsection
+
 @section('contents')
 <div class="row">
         <div class="ml-lg-4 mt-4 col-lg-6">

@@ -5,6 +5,9 @@
 @section('description')
 <meta name="description" content="YouTubeで公開されている歴史に名を刻んだボカロ曲をランキング形式で集めました。カラオケで歌うもよし、趣味で聴くのもよし。これだけ見ておけば間違いない！">
 @endsection
+@section('page_name')
+<?php $page_name = 'vocalo'?>
+@endsection
 @section('breadcrumbs')
 {{Breadcrumbs::render('vocalo.vocalo_ranking')}}
 @endsection
