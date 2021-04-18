@@ -70,6 +70,9 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">掲示板</a>
                 </li>
+                <li class="nav-item {{$page_name == 'contact'?'active':NULL}}">
+                    <a class="nav-link" href="{{route('contact')}}">歌ってみた</a>
+                </li>
             </ul>
         </div>
     </nav>

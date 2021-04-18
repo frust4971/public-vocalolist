@@ -24,9 +24,8 @@ class ContactFormController extends Controller
         }
         $mail_user = new MailUser;
         $mail_user -> ip_address = $_SERVER['REMOTE_ADDR'];
-        $mail_user ->save();
-
-        $mail = new PHPMailer(true);
+        // $mail_user ->save();
+        $mail = new PHPMailer();
         $mail->isSMTP();  
         $mail->Host = "smtp-mail.outlook.com";
         $mail->SMTPAuth   = true; 

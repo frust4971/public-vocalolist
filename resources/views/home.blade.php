@@ -136,6 +136,7 @@
     </div>
     <div class="card-body">
         <a href="{{route('info.about_site')}}">このサイトについて</a>
+        <p>お問い合わせフォームを設置しました (2021/04/18)</p>
     </div>
 </div>
 <br>
