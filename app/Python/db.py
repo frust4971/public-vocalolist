@@ -92,10 +92,12 @@ def delete_and_insert_into_not_vocalovideos(table_name,video_id):
     cur.execute(sql,(video_id,))
     cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
 
-def delete_video(table_name,video_id):
+def delete_video(table_name,video_id,should_insert_blacklist=False):
     table_name = get_safe_table_name(table_name)
     sql = "DELETE FROM {} WHERE video_id = %s".format(table_name)
-    cur.execute(sql,(video_id,))
+    cur.execute(sql, (video_id,))
+    if should_insert_blacklist:
+        cur.execute("INSERT INTO not_vocalovideos VALUES (%s)", (video_id,))
 
 def reset_mail_users_table():
     sql = "DELETE FROM {}".format(const.MAIL_USER_TABLE_NAME)

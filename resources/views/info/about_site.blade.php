@@ -25,19 +25,33 @@
     <p>アクセス数が増えるとモチベーションも上がるので、こんな機能が欲しいなどがあったらブックマークに登録してくれるとそのうち対応します</p>
     <p>見てくれる人が増える→便利な機能が追加される→皆も幸せ、管理人も幸せ<br><br>あはっ☆いいことづくめだね！</p>
 </div>
-<div class="card mt-5">
-    <div class="card-header">
-        <b>目次</b>
-    </div>
-    <div class="card-body">
-        ・<a class="text-dark" href="#vocalo">ボカロ</a>
-        <br>
-        ・<a class="text-dark" href="#utattemita">歌ってみた</a>
-        <br>
-        ・<a class="text-dark" href="#bulletin_board">掲示板</a>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mt-5">
+            <div class="card-header">
+                <b>目次</b>
+            </div>
+            <div class="card-body">
+                ・<a class="text-dark" href="#home">Home</a>
+                <br>
+                ・<a class="text-dark" href="#vocalo">ボカロ</a>
+                <br>
+                ・<a class="text-dark" href="#utattemita">歌ってみた</a>
+                <br>
+                ・<a class="text-dark" href="#bulletin_board">掲示板</a>
+                <br>
+                ・<a class="text-dark" href="#contact">お問い合わせ</a>
+            </div>
+        </div>
     </div>
 </div>
 <br>
+<div class="content my-5">
+
+    <h3 id="Home">Home</h3><br>
+    <p>パソコンだと9件づつ、スマホやタブレットだと3件づつ、新しく集めた動画を表示してます</p>
+    <p>何かお知らせがあるときは、このページの下のところで告知します</p>
+</div>
 <div class="content my-5">
 
     <h3 id="vocalo">ボカロ</h3><br>
@@ -77,6 +91,12 @@
 
     <h3 id="bulletin_board">掲示板</h3><br>
     <p>いつかは作る予定です<br><br>今のデータベース（情報を入れておくところ）だと容量少なすぎて掲示板入れるのはぜーーーったいムリ！<br><br>人が集まってきて、性能のいいデータベース借りれるようになったら実装します</p>
+
+</div>
+<div class="content my-5">
+
+    <h3 id="contact">お問い合わせ</h3><br>
+    <p>お問い合わせフォームです<br><br>欲しい機能だったり、伝えたいことがあるときに使ってください<br><br>一日一回まで送信できます</p>
 
 </div>
 <br>
