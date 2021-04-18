@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-<title>このサイトについて | VocaloList</title>
+<title>お問い合わせフォーム | VocaloList</title>
 @endsection
 @section('style')
 <style>
