@@ -56,6 +56,12 @@ def is_vocalo_description(description):
         return False
     return True
 
+not_utattemita_description_pattern = re.compile('.*(放送日|broadcast|人力).*', re.IGNORECASE)
+def is_utattemita_description(description):
+    if not_utattemita_description_pattern.match(description):
+        return False
+    return True
+
 def crawl(word, video_duration, published_after, published_before, order_by="viewCount", page_token=None,max_results=50):
     """
     YouTubeから検索結果を取得するメソッド
@@ -161,7 +167,7 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
                 continue
 
             if is_utattemita_table:
-                if is_utattemita_title(video["snippet"]["title"]):
+                if is_utattemita_title(video["snippet"]["title"]) and is_utattemita_description(video["snippet"]["description"]):
                     db.insert_video(table_name, video, view_count)
             elif is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video["snippet"]["description"]):
                 db.insert_video(table_name, video, view_count)
