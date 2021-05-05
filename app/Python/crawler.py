@@ -56,7 +56,7 @@ def is_vocalo_description(description):
         return False
     return True
 
-not_utattemita_description_pattern = re.compile('.*(放送日|broadcast|人力).*', re.IGNORECASE)
+not_utattemita_description_pattern = re.compile('.*(放送日|broadcast|人力VOCALOID).*', re.IGNORECASE)
 def is_utattemita_description(description):
     if not_utattemita_description_pattern.match(description):
         return False
