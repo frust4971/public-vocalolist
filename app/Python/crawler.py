@@ -30,35 +30,35 @@ vocalo_pattern = re.compile('.*オリジナル曲.*', re.IGNORECASE)
 not_vocalo_pattern = re.compile('.*(歌|cover|合唱|remix|曲|みた|バンド|反応|diva|カバー|カラオケ|真似|ライブ|コラボ).*', re.IGNORECASE)
 
 def is_vocalo_title(title):
-    if ng_word.match(title):
+    if ng_word.search(title):
         return False
-    if vocalo_pattern.match(title):
+    if vocalo_pattern.search(title):
         return True
-    if not_vocalo_pattern.match(title):
+    if not_vocalo_pattern.search(title):
         return False
-    if japanese_pattern.match(title):
+    if japanese_pattern.search(title):
         return True
     return False
 
-not_utattemita_pattern = re.compile('.*(feat|ボカロ曲|ft.|official|MV|movie|歌い方).*', re.IGNORECASE)
+not_utattemita_pattern = re.compile('.*(feat|ボカロ曲|ft.|official|MV|movie|歌い方|叩いてみた).*', re.IGNORECASE)
 def is_utattemita_title(title):
-    if ng_word.match(title):
+    if ng_word.search(title):
         return False
-    if not_utattemita_pattern.match(title):
+    if not_utattemita_pattern.search(title):
         return False
-    if japanese_pattern.match(title):
+    if japanese_pattern.search(title):
         return True
     return False
 
 not_vocalo_description_pattern = re.compile('.*(放送日|broadcast|コスプレ|本家|VOCALOID ver).*', re.IGNORECASE)
 def is_vocalo_description(description):
-    if not_vocalo_description_pattern.match(description):
+    if not_vocalo_description_pattern.search(description):
         return False
     return True
 
-not_utattemita_description_pattern = re.compile('.*(放送日|broadcast|人力VOCALOID|応募楽曲).*', re.IGNORECASE)
+not_utattemita_description_pattern = re.compile('.*(放送日|broadcast|人力VOCALOID|応募|購入).*', re.IGNORECASE)
 def is_utattemita_description(description):
-    if not_utattemita_description_pattern.match(description):
+    if not_utattemita_description_pattern.search(description):
         return False
     return True
 
@@ -102,16 +102,15 @@ def crawl(word, video_duration, published_after, published_before, order_by="vie
     ).execute()
     return search_response
 
-def get_view_count(video_id):
+def get_video(video_id):
     response = youtube.videos().list(
-        part="statistics",
+        part="snippet,statistics",
         id=video_id,
     ).execute()
     if len(response["items"]) == 0:
         raise NotFoundVideoException()
     video = response["items"][0]
-    view_count = video["statistics"]["viewCount"]
-    return int(view_count)
+    return video
 
 def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count, published_after=None, published_before=None,num_search=50,order_by="viewCount",must_disconnect_db=False):
     """
@@ -149,7 +148,7 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
     must_disconnect_db : bool
         DBの切断を行うかどうか
     """
-    is_utattemita_table = table_name == const.RECENTLY_UTATTEMIATA_TABLE_NAME
+    is_utattemita_table = (table_name == const.RECENTLY_UTATTEMIATA_TABLE_NAME)
     counter = 0
     max_results = num_search - 50 * counter
     if max_results > 50:
@@ -159,19 +158,21 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
     finished = False
     while True:
         for video in videos:
-            view_count = get_view_count(video["id"]["videoId"])
+            video_details = get_video(video["id"]["videoId"])
+            view_count = int(video_details["statistics"]["viewCount"])
             if view_count < filter_view_count:
+                if order_by == "viewCount":
+                    continue
                 finished = True
                 break
             if db.is_inserted_item(table_name, video["id"]["videoId"]):
                 continue
 
             if is_utattemita_table:
-                if is_utattemita_title(video["snippet"]["title"]) and is_utattemita_description(video["snippet"]["description"]):
+                if is_utattemita_title(video["snippet"]["title"]) and is_utattemita_description(video_details["snippet"]["description"]):
                     db.insert_video(table_name, video, view_count)
-            elif is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video["snippet"]["description"]):
+            elif is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video_details["snippet"]["description"]):
                 db.insert_video(table_name, video, view_count)
-        
         if finished or max_results < 50:
             break
 
@@ -221,7 +222,8 @@ def crawl_and_insert_famous_vocalovideos_into_db(table_name, word,  video_durati
     finished = False
     while True:
         for video in videos:
-            view_count = get_view_count(video["id"]["videoId"])
+            video_details = get_video(video["id"]["videoId"])
+            view_count = int(video_details["statistics"]["viewCount"])
             if view_count < filter_view_count:
                 finished = True
                 break
@@ -229,7 +231,7 @@ def crawl_and_insert_famous_vocalovideos_into_db(table_name, word,  video_durati
                 db.update_view_count(table_name,video["id"]["videoId"],view_count)
                 continue
 
-            if is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video["snippet"]["description"]):
+            if is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video_details["snippet"]["description"]):
                 db.insert_video(table_name, video, view_count)
         if finished:
             break
@@ -242,7 +244,8 @@ def update_all_view_count(table_name,must_disconnect_db=False):
     for row in rows:
         video_id = row[0]
         try:
-            view_count = get_view_count(video_id)
+            video_details = get_video(video_id)
+            view_count = int(video_details["statistics"]["viewCount"])
         except NotFoundVideoException:
             db.delete_video(table_name,video_id)
         db.update_view_count(table_name, video_id, view_count)
@@ -250,15 +253,4 @@ def update_all_view_count(table_name,must_disconnect_db=False):
     if must_disconnect_db:
         db.disconnect()
 
-def insert_into_db_by_id(table_name, video_id):
-    response = youtube.videos().list(
-    part="snippet,statistics",
-    id=video_id,
-    ).execute()
-    video = response["items"][0]
-    #searchのリソースと同じ形になるように調整
-    video["id"] = {}
-    video["id"]["videoId"] = video_id
-    db.insert_video(table_name,video,int(video["statistics"]["viewCount"]))
-    db.commit()
 

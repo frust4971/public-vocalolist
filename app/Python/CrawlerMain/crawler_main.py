@@ -23,7 +23,7 @@ if __name__ == "__main__":
         crawler.crawl_and_insert_into_db(const.RECENTLY_VOCALO_TABLE_NAME,researchWord,"medium",filter_view_count,recently_vocalo_published_after,recently_vocalo_published_before,num_search=max_results_by_view_count)
     
     #再生回数順で最近話題の歌ってみたを集める
-    recently_utattemita_published_after = (datetime.datetime.today() + relativedelta(months=-1)).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    recently_utattemita_published_after = (datetime.datetime.today() + relativedelta(weeks=-1)).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     recently_utattemita_published_before = (datetime.datetime.today()).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     crawler.crawl_and_insert_into_db(const.RECENTLY_UTATTEMIATA_TABLE_NAME, "ボカロ 歌ってみた", "short", filter_view_count, recently_utattemita_published_after, recently_utattemita_published_before,num_search=max_results_by_view_count)
     crawler.crawl_and_insert_into_db(const.RECENTLY_UTATTEMIATA_TABLE_NAME, "ボカロ 歌ってみた", "medium", filter_view_count, recently_utattemita_published_after, recently_utattemita_published_before,num_search=max_results_by_view_count)
