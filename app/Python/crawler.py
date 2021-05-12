@@ -161,7 +161,7 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
             video_details = get_video(video["id"]["videoId"])
             view_count = int(video_details["statistics"]["viewCount"])
             if view_count < filter_view_count:
-                if order_by == "viewCount":
+                if order_by == "relative":
                     continue
                 finished = True
                 break
