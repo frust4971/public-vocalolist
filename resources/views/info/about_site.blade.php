@@ -38,8 +38,6 @@
                 <br>
                 ・<a class="text-dark" href="#utattemita">歌ってみた</a>
                 <br>
-                ・<a class="text-dark" href="#bulletin_board">掲示板</a>
-                <br>
                 ・<a class="text-dark" href="#contact">お問い合わせ</a>
             </div>
         </div>
@@ -85,12 +83,6 @@
         <br>
         <p>よほど無理な条件でなければ、短期間に近づけるべきじゃないかと思いましたが、それだと知名度とかで変わってきちゃうのかなぁという気も<br><br>じわじわ評価されていく動画も集めていきたいので、様子を見ながら改善していきます</p>
     </div>
-
-</div>
-<div class="content my-5">
-
-    <h3 id="bulletin_board">掲示板</h3><br>
-    <p>いつかは作る予定です<br><br>今のデータベース（情報を入れておくところ）だと容量少なすぎて掲示板入れるのはぜーーーったいムリ！<br><br>人が集まってきて、性能のいいデータベース借りれるようになったら実装します</p>
 
 </div>
 <div class="content my-5">

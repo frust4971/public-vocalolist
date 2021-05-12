@@ -122,16 +122,6 @@
 <br>
 <div class="card">
     <div class="card-header">
-        <b>人気スレ</b>
-    </div>
-    <div class="card-body">
-        <p>お前らのオススメ曲教えろ(12)</p>
-        <p>※まだ掲示板は作成していません。今後こんな感じにする予定です</p>
-    </div>
-</div>
-<br>
-<div class="card">
-    <div class="card-header">
         <b>お知らせ</b>
     </div>
     <div class="card-body">

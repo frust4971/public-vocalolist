@@ -35,5 +35,9 @@
             </div>
         </div>
     @endfor
-    {{$vocalovideos->links('vendor.pagination.original_pagination_view')}}
+    <?php 
+        $queries = array();
+        if(htmlspecialchars($seed) != 0 ) $queries['seed'] = htmlspecialchars($seed);
+    ?>
+    {{$vocalovideos->appends($queries)->links('vendor.pagination.original_pagination_view')}}
 @endsection

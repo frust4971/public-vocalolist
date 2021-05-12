@@ -53,7 +53,8 @@
             </div>
         </div>
     @endfor
-    <?php $queries = array();
+    <?php 
+        $queries = array();
         if(htmlspecialchars($sort) != 0 ) $queries['sort'] = htmlspecialchars($sort);
     ?>
     {{$vocalovideos->appends($queries)->links('vendor.pagination.original_pagination_view')}}
