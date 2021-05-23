@@ -27,7 +27,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <style>
         body {
-            background-color: #33CC66;
+            background-color: #66CCCC;
         }
 
         .container {
