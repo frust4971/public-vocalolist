@@ -49,7 +49,8 @@
             <div class="row">
 
                 <div class="col-lg-1 col-0"></div>
-                <div class="col-lg-6 text-right">{{$utattemita[$i]->published_at}}</div>
+                <div class="col-lg-3 text-left">再生回数<div class="font-weight-bold">{{$utattemita[$i]->view_count}}</div></div>
+                <div class="col-lg-3 text-right my-2">{{$utattemita[$i]->published_at}}</div>
             </div>
         </div>
     @endfor
