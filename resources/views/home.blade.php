@@ -3,7 +3,7 @@
 <title>VocaloList - 気になるボカロを集めるサイト</title>
 @endsection
 @section('description')
-<meta name="description" content="話題になっているボカロ曲や歌ってみた動画を毎日更新！歴代ランキングもあります。">
+<meta name="description" content="話題になっている人気ボカロ曲や歌ってみた動画を毎日更新！歴代ランキングもあります。カラオケで歌う曲探しにもおすすめです">
 @endsection
 @section('page_name')
 <?php $page_name = 'home'?>
