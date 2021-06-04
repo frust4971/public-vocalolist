@@ -10,6 +10,10 @@
 @endsection
 @section('contents')
 <br>
+<div class="row">
+    <div class="col-12">ボカロリストへようこそ！！<br>このサイトでは最近注目度の高いボカロ関係の動画を毎日、自動で更新しています<br>ゆるーく楽しんでいってください</div>
+</div>
+<br>
 <div class="card">
     <a class="text-dark" href="{{route('vocalo.recently_famous_vocalovideos')}}"><div class="card-header"><b>最近話題のボカロ</b></div></a>
     <div class="card-body">
