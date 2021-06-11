@@ -23,7 +23,7 @@ class NotFoundVideoException(Exception):
     def __str__(self):
         return "動画が見つかりませんでした"
 
-ng_word = re.compile('.*(ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|OP|なボカロ|演奏|ボカロP|top|踊ってみた|手描き|太鼓|叩いて|弾い|人力|OP|mmd|mad|プロセカ|TV|ピアノ|combo|プロモ|コスプレ|しりとり|歌詞|プレイ|リアクション|sub|まとめ).*', re.IGNORECASE)
+ng_word = re.compile('.*(ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|OP|なボカロ|演奏|ボカロP|top|踊ってみた|手描き|太鼓|叩いて|弾い|人力|OP|mmd|mad|プロセカ|TV|ピアノ|combo|プロモ|コスプレ|しりとり|歌詞|プレイ|リアクション|sub|まとめ|再現).*', re.IGNORECASE)
 japanese_pattern = re.compile('.*([亜-熙ぁ-んァ-ヶ]).*')
 
 vocalo_pattern = re.compile('.*オリジナル曲.*', re.IGNORECASE)
