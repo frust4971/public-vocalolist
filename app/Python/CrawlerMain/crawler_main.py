@@ -16,8 +16,8 @@ if __name__ == "__main__":
     #再生回数順で最近話題のボカロを集める
     recently_vocalo_published_after = (datetime.datetime.today() + relativedelta(months=-6)).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     recently_vocalo_published_before = (datetime.datetime.today()).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-    researchWords = ["vocaloid", "ボカロ", "ボカロ feat", "ボカロ GUMI", "ボカロ IA", "ボカロ　ミク", "ボカロ　リン", "ボカロ　レン", "ボカロ　ウナ",
-    "ボカロ　ルカ","ボカロ　flower","ボカロ Lily","ボカロ　KAITO","ボカロ　miki","ボカロ　mayu"]
+    researchWords = ["vocaloid", "ボカロ", "ボカロ feat", "ボカロ GUMI", "ボカロ IA", "初音ミク", "鏡音リン", "鏡音レン", "音街ウナ",
+    "巡音ルカ","ボカロ　flower","ボカロ Lily","ボカロ　KAITO","ボカロ　miki","ボカロ　mayu","可不"]
     for researchWord in researchWords:
         crawler.crawl_and_insert_into_db(const.RECENTLY_VOCALO_TABLE_NAME, researchWord, "short", filter_view_count, recently_vocalo_published_after, recently_vocalo_published_before,num_search=max_results_by_view_count)
         crawler.crawl_and_insert_into_db(const.RECENTLY_VOCALO_TABLE_NAME,researchWord,"medium",filter_view_count,recently_vocalo_published_after,recently_vocalo_published_before,num_search=max_results_by_view_count)
