@@ -35,6 +35,7 @@
             </button>
             
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking')}}">-</a>
             @foreach($years as $y)
                 <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking',['year' => $y])}}">{{$y}}</a>
             @endforeach 
