@@ -13,8 +13,9 @@
     @if ($paginator->lastPage() > config('const.PAGINATE.LINK_NUM'))
 
     {{-- 現在ページが表示するリンクの中心位置よりも左の時 --}}
-    @if ($paginator->currentPage() <= floor(config('const.PAGINATE.LINK_NUM') / 2)) <?php $start_page = 1; //最初のページ 
-                                                                                    ?> <?php $end_page = config('const.PAGINATE.LINK_NUM'); ?> {{-- 現在ページが表示するリンクの中心位置よりも右の時 --}} @elseif ($paginator->currentPage() > $paginator->lastPage() - floor(config('const.PAGINATE.LINK_NUM') / 2))
+    @if ($paginator->currentPage() <= floor(config('const.PAGINATE.LINK_NUM') / 2)) 
+        <?php $start_page = 1; //最初のページ ?>
+        <?php $end_page = config('const.PAGINATE.LINK_NUM'); ?> {{-- 現在ページが表示するリンクの中心位置よりも右の時 --}} @elseif ($paginator->currentPage() > $paginator->lastPage() - floor(config('const.PAGINATE.LINK_NUM') / 2))
         <?php $start_page = $paginator->lastPage() - (config('const.PAGINATE.LINK_NUM') - 1); ?>
         <?php $end_page = $paginator->lastPage(); ?>
 

@@ -11,31 +11,66 @@
 @section('breadcrumbs')
 {{Breadcrumbs::render('vocalo.vocalo_ranking')}}
 @endsection
+<?php
+    $years = [];
+    for($i = date('Y');$i >= 2007 ;$i--){
+        $years[] = $i;
+    }
+?>
 @section('contents')
     <div class="row">
-        <div class="ml-lg-4 mt-4 col-lg-6">
-            <h2>歴代ボカロランキング</h2>
+        <div class="h2 ml-lg-4 mt-4 col-lg-6">
+            歴代ボカロランキング
         </div>
     </div>
-    @for($i = 0;$i < count($vocalovideos);$i++)
-        <div class="content px-2 py-lg-3 py-2">
-            <div class="row">
-                <h1 class="col-1 text-center"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
-                <div class="embed-responsive embed-responsive-16by9 col-lg-6">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$vocalovideos[$i]->video_id}}"></iframe>
+    <div class="row">
+        <div class="dropdown text-right my-1  ml-lg-3 col-lg-7">
+        
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @if($year != 0)
+                {{$year}}
+            @else
+                年検索
+            @endif
+            </button>
+            
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            @foreach($years as $y)
+                <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking',['year' => $y])}}">{{$y}}</a>
+            @endforeach 
+            </div>
+        
+        </div>
+    </div>
+    @if(count($vocalovideos) === 0)
+        <div class="row">
+            <div class="h4 col-lg-6  ml-lg-4 mb-5">見つかりませんでした...</div>
+        </div>
+    @else
+        @for($i = 0;$i < count($vocalovideos);$i++)
+            <div class="content px-2 py-lg-3 py-2">
+                <div class="row">
+                    <h1 class="col-1 text-center"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
+                    <div class="embed-responsive embed-responsive-16by9 col-lg-6">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$vocalovideos[$i]->video_id}}"></iframe>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-1 col-0"></div>
+                    <h2 class="col-lg-6 bg-light py-2 border-left border-primary">{{htmlspecialchars_decode($vocalovideos[$i]->title,ENT_QUOTES)}}</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1 col-0"></div>
+                    <div class="col-lg-3 col-6 text-left">再生回数<div class="font-weight-bold">{{$vocalovideos[$i]->view_count}}</div></div>
+                    <div class="col-lg-3 col-6 text-right my-2">{{$vocalovideos[$i]->published_at}}</div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-1 col-0"></div>
-                <h2 class="col-lg-6 bg-light py-2 border-left border-primary">{{htmlspecialchars_decode($vocalovideos[$i]->title,ENT_QUOTES)}}</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-1 col-0"></div>
-                <div class="col-lg-3 col-6 text-left">再生回数<div class="font-weight-bold">{{$vocalovideos[$i]->view_count}}</div></div>
-                <div class="col-lg-3 col-6 text-right my-2">{{$vocalovideos[$i]->published_at}}</div>
-            </div>
-        </div>
-    @endfor
-    {{$vocalovideos->links('vendor.pagination.ranking_pagination_view')}}
+        @endfor
+    @endif
+    <?php 
+        $queries = array();
+        if(htmlspecialchars($year) != 0 ) $queries['year'] = htmlspecialchars($year);
+    ?>
+    {{$vocalovideos->appends($queries)->links('vendor.pagination.ranking_pagination_view')}}
 @endsection

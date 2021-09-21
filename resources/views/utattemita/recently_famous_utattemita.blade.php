@@ -20,16 +20,16 @@
     <div class="row">
         <div class="dropdown text-right my-1  ml-lg-3 col-lg-7">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            @if($sort == 0)
-                投稿日順
-            @elseif($sort == 1)
+            @if($sort == 1)
                 再生回数順
+            @else
+                投稿日順
             @endif
             </button>
             
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="/utattemita/recently_famous_utattemita">投稿日順</a>
-                <a class="dropdown-item" href="/utattemita/recently_famous_utattemita?sort=1">再生回数順</a>
+                <a class="dropdown-item" href="{{route('utattemita.recently_famous_utattemita',['sort' => 1])}}">再生回数順</a>
             </div>
         </div>
     </div>

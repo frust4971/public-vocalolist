@@ -129,9 +129,12 @@
         <b>お知らせ</b>
     </div>
     <div class="card-body">
-        <a href="{{route('info.about_site')}}">このサイトについて</a>
-        <p>お問い合わせフォームを設置しました (2021/04/18)</p>
+        <a href="{{route('vocalo.vocalo_ranking')}}" class="text-dark"><div>歴代ボカロランキングに年検索を追加しました (2021/09/21)</div></a>
+        <a href="{{route('contact')}}" class="text-dark"><div>お問い合わせフォームを設置しました (2021/04/18)</div></a>
     </div>
 </div>
 <br>
+<p><a href="{{route('info.about_site')}}">このサイトについて</a></p>
+<br>
+
 @endsection
