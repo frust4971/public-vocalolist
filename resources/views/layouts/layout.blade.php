@@ -37,6 +37,7 @@
     @yield('title')
     @yield('description')
     @yield('style')
+    @yield('meta')
 </head>
 
 <body>

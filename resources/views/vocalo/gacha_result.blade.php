@@ -2,6 +2,9 @@
 @section('title')
 <title>ボカロガチャ結果 | VocaloList</title>
 @endsection
+@section('meta')
+<meta name="robots" content="noindex" />
+@endsection
 @section('page_name')
 <?php $page_name = 'vocalo'?>
 @endsection
