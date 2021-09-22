@@ -16,4 +16,8 @@ class RecentlyFamousVocalovideoController extends Controller
         }
         return view('vocalo.recently_famous_vocalovideos',compact('vocalovideos','page','sort'));
     }
+    public function show($id){
+        $vocalovideo = DB::table('recently_famous_vocalovideos')->where('video_id',$id)->first();
+        return view('vocalo.recently_famous_vocalovideo',compact('vocalovideo'));
+    }
 }

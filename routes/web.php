@@ -18,6 +18,7 @@ Route::get('/info/about_site',function(){
     return view('info.about_site');
 })->name('info.about_site');
 Route::get('/vocalo/recently_famous_vocalovideos','RecentlyFamousVocalovideoController@index')->name('vocalo.recently_famous_vocalovideos');
+Route::get('/vocalo/recently_famous_vocalovideos/{id}','RecentlyFamousVocalovideoController@show')->name('vocalo.recently_famous_vocalovideo');
 Route::get('/vocalo/vocalo_ranking','FamousVocalovideoController@index')->name('vocalo.vocalo_ranking');
 Route::get('/vocalo/vocalo_gacha',function(){
     return view('vocalo.vocalo_gacha');
