@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-<title>最近話題のボカロ歌ってみた | VocaloList</title>
+<title>{{htmlspecialchars_decode($utattemita_video->title,ENT_QUOTES)}} | VocaloList</title>
 @endsection
 @section('meta')
 <meta name="robots" content="noindex" />

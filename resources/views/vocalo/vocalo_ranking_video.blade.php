@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-<title>歴代ボカロランキング  | VocaloList</title>
+<title>{{htmlspecialchars_decode($vocalovideo->title,ENT_QUOTES)}}  | VocaloList</title>
 @endsection
 @section('meta')
 <meta name="robots" content="noindex" />
