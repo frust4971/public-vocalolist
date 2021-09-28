@@ -16,5 +16,5 @@ function checkImg() {
 function replaceImg(thumbnail) {
     thumbnail.src = thumbnail.src.replace('maxresdefault','mqdefault');
 }
-checkImg();
+window.onload = checkImg();
 
