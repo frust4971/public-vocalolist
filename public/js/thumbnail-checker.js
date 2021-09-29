@@ -2,8 +2,8 @@ function checkImg() {
     let replaceThumbnails = [];
     let thumbnails = document.querySelectorAll('.youtube-thumbnail');
     thumbnails.forEach(function (thumbnail) {
-        //横幅が120pxだったらエラー用の画像返されていると判断
-        if (thumbnail.naturalWidth == 120) {
+        //横幅が120pxだったらエラー用の画像返されていると判断。0の場合もある
+        if (thumbnail.naturalWidth == 120 || thumbnail.naturalWidth == 0) {
             replaceThumbnails.push(thumbnail);
         }
     })
