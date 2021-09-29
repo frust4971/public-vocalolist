@@ -9,7 +9,6 @@
 <style>
         .ytp-title-text {
             max-width: 100%;
-            padding-left: 10px;
             overflow: hidden;
             white-space: nowrap;
             word-wrap: normal;
@@ -76,7 +75,7 @@
                             <div class="d-lg-none d-block">
                                 <div class="col-12">
                                     <a href="{{route('vocalo.recently_famous_vocalovideos.show',['id' => $pickup_vocalovideos[$i]->video_id])}}" style="display:block;">
-                                        <div class="ytp-title ytp-title-text">{{$pickup_vocalovideos[$i]->title}}</div>
+                                        <div class="ytp-title ytp-title-text pl-2">{{$pickup_vocalovideos[$i]->title}}</div>
                                         <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                     </a>
                                 </div>
@@ -113,9 +112,6 @@
                     <div class="display-if-lg-or-more">
                         <div class="d-none d-lg-flex">
                             @for($j = $i * 3; $j < ($i + 1) * 3; $j++)
-                                <!-- <div class="embed-responsive embed-responsive-16by9  col-4">
-                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_utattemita[$j]->video_id}}"></iframe>
-                                </div> -->
                                 <div class="col-4 p-1">
                                     <a href="{{route('utattemita.recently_famous_utattemita.show',['id' => $pickup_utattemita[$j]->video_id])}}" style="display:block;">
                                         <div class="ytp-title ytp-title-text">{{$pickup_utattemita[$j]->title}}</div>
@@ -128,12 +124,9 @@
                     </div>
                     <div class="display-if-under-lg">
                         <div class="d-lg-none d-block">
-                            <!-- <div class="embed-responsive embed-responsive-16by9  col-12">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_utattemita[$i]->video_id}}"></iframe>
-                            </div> -->
                             <div class="col-12">
                                 <a href="{{route('utattemita.recently_famous_utattemita.show',['id' => $pickup_utattemita[$i]->video_id])}}" style="display:block;">
-                                    <div class="ytp-title ytp-title-text">{{$pickup_utattemita[$i]->title}}</div>
+                                    <div class="ytp-title ytp-title-text pl-2">{{$pickup_utattemita[$i]->title}}</div>
                                     <img src="http://i.ytimg.com/vi/{{$pickup_utattemita[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                 </a>
                             </div>

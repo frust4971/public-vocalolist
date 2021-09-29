@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="content px-2 py-lg-3 py-2">
+    <div class="content px-2 py-5">
         <div class="row">
             <div class="col-lg-1 col-0"></div>
             <div class="embed-responsive embed-responsive-16by9 col-lg-8">
