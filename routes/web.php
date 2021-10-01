@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/home','HomeController@index')->name('home');
 Route::get('/info/about_site',function(){
     return view('info.about_site');
 })->name('info.about_site');
