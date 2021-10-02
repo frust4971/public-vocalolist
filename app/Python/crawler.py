@@ -26,7 +26,7 @@ class NotFoundVideoException(Exception):
 ng_word = re.compile('.*(字幕|ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|なボカロ|演奏|ボカロP|top\d|踊ってみた|手描き|太鼓|叩いて|弾い|人力|mmd|mad|プロセカ|TV|ピアノ|combo|プロモ|コスプレ|しりとり|歌詞|プレイ|リアクション|sub|まとめ|再現|絵師|生放送|shorts|ゲームサイズ|アート展|(映像|一部)公開|デビュー).*', re.IGNORECASE)
 japanese_pattern = re.compile('.*([ぁ-んァ-ヶ]).*')
 
-vocalo_pattern = re.compile('.*オリジナル曲.*', re.IGNORECASE)
+vocalo_pattern = re.compile('^【MV】.*|.*オリジナル曲.*|.*MV$', re.IGNORECASE)
 not_vocalo_pattern = re.compile('.*(歌|cover|合唱|remix|曲|バンド|反応|diva|カバー|カラオケ|真似|ライブ|コラボ|チャレンジ|みた[^い]).*', re.IGNORECASE)
 def is_vocalo_title(title):
     if ng_word.search(title):
@@ -251,3 +251,4 @@ def update_all_view_count(table_name,must_disconnect_db=False):
     db.commit()
     if must_disconnect_db:
         db.disconnect()
+print(is_vocalo_title(''))
