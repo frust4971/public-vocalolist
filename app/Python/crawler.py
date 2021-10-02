@@ -251,4 +251,3 @@ def update_all_view_count(table_name,must_disconnect_db=False):
     db.commit()
     if must_disconnect_db:
         db.disconnect()
-print(is_vocalo_title(''))
