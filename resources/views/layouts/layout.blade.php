@@ -36,6 +36,10 @@
             background-color: aliceblue;
         }
 
+        .content-title{
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
     </style>
     @yield('title')
     @yield('description')

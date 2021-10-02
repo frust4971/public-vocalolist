@@ -28,7 +28,7 @@
 
         <div class="row">
             <div class="col-lg-1 col-0"></div>
-            <h2 class="col-lg-8 bg-light py-2 border-left border-primary">{{htmlspecialchars_decode($utattemita_video->title,ENT_QUOTES)}}</h2>
+            <h2 class="col-lg-8 bg-light py-2 border-left border-primary content-title">{{htmlspecialchars_decode($utattemita_video->title,ENT_QUOTES)}}</h2>
         </div>
         <div class="row">
 
