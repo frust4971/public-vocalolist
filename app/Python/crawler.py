@@ -27,7 +27,7 @@ ng_word = re.compile('.*(字幕|ランキング|メドレー|替え歌|再生|�
 japanese_pattern = re.compile('.*([ぁ-んァ-ヶ]).*')
 
 vocalo_pattern = re.compile('^【MV】.*|.*オリジナル曲.*|.*MV$', re.IGNORECASE)
-not_vocalo_pattern = re.compile('.*(歌|cover|合唱|remix|曲|バンド|反応|diva|カバー|カラオケ|真似|ライブ|コラボ|チャレンジ|みた[^い]).*', re.IGNORECASE)
+not_vocalo_pattern = re.compile('.*(歌[^愛]|cover|合唱|remix|曲|バンド|反応|diva|カバー|カラオケ|真似|ライブ|コラボ|チャレンジ|みた[^い]).*', re.IGNORECASE)
 def is_vocalo_title(title):
     if ng_word.search(title):
         return False
