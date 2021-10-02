@@ -23,7 +23,7 @@ class NotFoundVideoException(Exception):
     def __str__(self):
         return "動画が見つかりませんでした"
 
-ng_word = re.compile('.*(字幕|ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|なボカロ|演奏|ボカロP|top\d|踊ってみた|手描き|太鼓|叩いて|弾い|人力|mmd|mad|プロセカ|TV|ピアノ|combo|プロモ|コスプレ|しりとり|歌詞|プレイ|リアクション|sub|まとめ|再現|絵師|生放送|shorts|ゲームサイズ|アート展).*', re.IGNORECASE)
+ng_word = re.compile('.*(字幕|ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|なボカロ|演奏|ボカロP|top\d|踊ってみた|手描き|太鼓|叩いて|弾い|人力|mmd|mad|プロセカ|TV|ピアノ|combo|プロモ|コスプレ|しりとり|歌詞|プレイ|リアクション|sub|まとめ|再現|絵師|生放送|shorts|ゲームサイズ|アート展|(映像|一部)公開|デビュー).*', re.IGNORECASE)
 japanese_pattern = re.compile('.*([ぁ-んァ-ヶ]).*')
 
 vocalo_pattern = re.compile('.*オリジナル曲.*', re.IGNORECASE)
@@ -251,5 +251,3 @@ def update_all_view_count(table_name,must_disconnect_db=False):
     db.commit()
     if must_disconnect_db:
         db.disconnect()
-
-
