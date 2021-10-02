@@ -10,9 +10,9 @@ class RecentlyFamousUtattemitaController extends Controller
         $page = $request->input('page',1);
         $sort = $request->input('sort',0);
         if($sort == 1){
-            $utattemita = DB::table('recently_famous_utattemita')->orderBy('view_count','desc')->paginate(10);
+            $utattemita = DB::table('recently_famous_utattemita')->orderBy('view_count','desc')->orderBy('video_id')->paginate(10);
         }else{
-            $utattemita = DB::table('recently_famous_utattemita')->orderBy('published_at','desc')->paginate(10);
+            $utattemita = DB::table('recently_famous_utattemita')->orderBy('published_at','desc')->orderBy('video_id')->paginate(10);
         }
         return view('utattemita.recently_famous_utattemita',compact('utattemita','page','sort'));
     }
