@@ -49,7 +49,7 @@ def is_utattemita_title(title):
         return True
     return False
 
-not_vocalo_description_pattern = re.compile('.*(放送日|broadcast|コスプレ|本家|VOCALOID ver|歌ってみた|オープニング|楽曲提供).*', re.IGNORECASE)
+not_vocalo_description_pattern = re.compile('.*(放送日|broadcast|コスプレ|本家|VOCALOID ver|歌ってみた|オープニング|楽曲提供|イラストメイキング).*', re.IGNORECASE)
 def is_vocalo_description(description):
     if not_vocalo_description_pattern.search(description):
         return False
