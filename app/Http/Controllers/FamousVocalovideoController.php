@@ -16,10 +16,12 @@ class FamousVocalovideoController extends Controller
             $vocalovideos = DB::table('famous_vocalovideos')->whereYear('published_at',$year)->orderBy('view_count','desc')->orderBy('video_id')->paginate(10);
         }
         
-        return view('vocalo.vocalo_ranking',compact('vocalovideos','year','page'));
+        return view('vocalo.vocalo_ranking',compact('vocalovideos','page','year'));
     }
-    public function show($id){
+    public function show(Request $request,$id){
+        $year = $request->input('year',0);
+        $page = $request->input('page',1);
         $vocalovideo = DB::table('famous_vocalovideos')->where('video_id',$id)->first();
-        return view('vocalo.vocalo_ranking_video',compact('vocalovideo'));
+        return view('vocalo.vocalo_ranking_video',compact('vocalovideo','page','year'));
     }
 }

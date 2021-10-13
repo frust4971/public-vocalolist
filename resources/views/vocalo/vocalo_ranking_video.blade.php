@@ -9,7 +9,7 @@
 <?php $page_name = 'vocalo'?>
 @endsection
 @section('breadcrumbs')
-{{Breadcrumbs::render('vocalo.vocalo_ranking')}}
+{{Breadcrumbs::render('vocalo.vocalo_ranking.show',htmlspecialchars_decode($vocalovideo->title,ENT_QUOTES),$vocalovideo->video_id,$page,$year)}}
 @endsection
 @section('contents')
     <div class="row">

@@ -9,8 +9,13 @@
 <?php $page_name = 'vocalo'?>
 @endsection
 @section('breadcrumbs')
-{{Breadcrumbs::render('vocalo.recently_famous_vocalovideos')}}
+{{Breadcrumbs::render('vocalo.recently_famous_vocalovideos',$page,$sort)}}
 @endsection
+<?php 
+    $queries = array();
+    if(htmlspecialchars($sort) != 0 ) $queries['sort'] = htmlspecialchars($sort);
+    if(isset($page)) $queries['page'] = htmlspecialchars($page);
+?>
 @section('contents')
     <div class="row">
         <div class="ml-lg-4 mt-4 col-lg-6">
@@ -38,7 +43,11 @@
             <div class="row">
                 <h1 class="col-1 text-center pl-0"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
                 <div class="col-lg-6 p-0">
-                    <a href="{{route('vocalo.recently_famous_vocalovideos.show',['id' => $vocalovideos[$i]->video_id])}}" style="display:block;">
+                    <?php 
+                        $video_queries = $queries;
+                        $video_queries['id'] = $vocalovideos[$i]->video_id;
+                    ?>
+                    <a href="{{route('vocalo.recently_famous_vocalovideos.show',$video_queries)}}" style="display:block;">
                         <img src="http://i.ytimg.com/vi/{{$vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                     </a>
                 </div>
@@ -56,9 +65,5 @@
             </div>
         </div>
     @endfor
-    <?php 
-        $queries = array();
-        if(htmlspecialchars($sort) != 0 ) $queries['sort'] = htmlspecialchars($sort);
-    ?>
     {{$vocalovideos->appends($queries)->links('vendor.pagination.original_pagination_view')}}
 @endsection

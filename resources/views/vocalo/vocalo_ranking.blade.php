@@ -9,13 +9,18 @@
 <?php $page_name = 'vocalo'?>
 @endsection
 @section('breadcrumbs')
-{{Breadcrumbs::render('vocalo.vocalo_ranking')}}
+{{Breadcrumbs::render('vocalo.vocalo_ranking',$page,$year)}}
 @endsection
 <?php
     $years = [];
     for($i = date('Y');$i >= 2007 ;$i--){
         $years[] = $i;
     }
+?>
+<?php 
+    $queries = array();
+    if(isset($page)) $queries['page'] = htmlspecialchars($page);
+    if(htmlspecialchars($year) != 0 ) $queries['year'] = htmlspecialchars($year);
 ?>
 @section('contents')
     <div class="row">
@@ -53,7 +58,11 @@
                 <div class="row">
                     <h1 class="col-1 text-center pl-0 pl-0"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
                     <div class="col-lg-6 p-0">
-                        <a href="{{route('vocalo.vocalo_ranking.show',['id' => $vocalovideos[$i]->video_id])}}" style="display:block;">
+                        <?php 
+                            $video_queries = $queries;
+                            $video_queries['id'] = $vocalovideos[$i]->video_id;
+                        ?>
+                        <a href="{{route('vocalo.vocalo_ranking.show',$video_queries)}}" style="display:block;">
                             <img src="http://i.ytimg.com/vi/{{$vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100  youtube-thumbnail">
                         </a>
                     </div>
@@ -71,9 +80,5 @@
             </div>
         @endfor
     @endif
-    <?php 
-        $queries = array();
-        if(htmlspecialchars($year) != 0 ) $queries['year'] = htmlspecialchars($year);
-    ?>
     {{$vocalovideos->appends($queries)->links('vendor.pagination.ranking_pagination_view')}}
 @endsection

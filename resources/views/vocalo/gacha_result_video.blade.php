@@ -9,7 +9,7 @@
 <?php $page_name = 'vocalo'?>
 @endsection
 @section('breadcrumbs')
-{{Breadcrumbs::render('vocalo.gacha_result')}}
+{{Breadcrumbs::render('vocalo.gacha_result.show',htmlspecialchars_decode($vocalovideo->title,ENT_QUOTES),$vocalovideo->video_id,$seed,$page)}}
 @endsection
 @section('contents')
     <div class="row">

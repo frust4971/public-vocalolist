@@ -14,7 +14,7 @@ conn = mysql.connector.connect(
     password=os.environ["DB_PASSWORD"],
     database=os.environ["DB_DATABASE"]
 )
-cur = conn.cursor()
+cur = conn.cursor(buffered=True)
 date_format = re.compile('\d+-\d+-\d+')
 
 def get_safe_table_name(table_name):
@@ -37,6 +37,14 @@ def is_inserted_item(table_name, video_id):
     table_name = get_safe_table_name(table_name)
     sql = "SELECT video_id FROM {} WHERE video_id = %s".format(table_name)
     cur.execute(sql, (video_id,))
+    if cur.fetchone():
+        return True
+    return False
+
+def is_inserted_title(table_name, word):
+    table_name = get_safe_table_name(table_name)
+    sql = "SELECT title FROM {} WHERE title LIKE %s".format(table_name)
+    cur.execute(sql, ('%' + word + '%',))
     if cur.fetchone():
         return True
     return False

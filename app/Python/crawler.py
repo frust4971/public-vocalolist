@@ -23,7 +23,7 @@ class NotFoundVideoException(Exception):
     def __str__(self):
         return "動画が見つかりませんでした"
 
-ng_word = re.compile('.*(字幕|ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|なボカロ|演奏|ボカロP|top\d|踊ってみた|手描き|太鼓|叩いて|弾い|人力|mmd|mad|プロセカ|TV|ピアノ|combo|プロモ|コスプレ|しりとり|歌詞|プレイ|リアクション|sub|まとめ|再現|絵師|生放送|shorts|ゲームサイズ|アート展|(映像|一部)公開|デビュー).*', re.IGNORECASE)
+ng_word = re.compile('.*(字幕|ランキング|メドレー|替え歌|再生|検定|クイズ|テスト|なボカロ|演奏|ボカロP|top\d|踊ってみた|手描き|太鼓|叩いて|弾い|人力|mmd|mad|プロセカ|TV|ピアノ|combo|プロモ|コスプレ|しりとり|歌詞|プレイ|リアクション|sub|まとめ|再現|絵師|生放送|shorts|ゲームサイズ|アート展|(映像|一部)公開|デビュー|神回|リメイク|【中文】|version|CHUNITHM).*', re.IGNORECASE)
 japanese_pattern = re.compile('.*([ぁ-んァ-ヶ]).*')
 
 vocalo_pattern = re.compile('^【MV】.*|.*オリジナル曲.*|.*MV$', re.IGNORECASE)
@@ -137,8 +137,8 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
     published_before : datetime
         指定した日時より前に作成された動画を返す
 
-    max_results : int
-        動画の検索結果の数の上限を指定する
+    num_search : int
+        動画の検索する数を指定する
 
     order_by : string
         viewCount → 再生回数順
@@ -172,7 +172,7 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
                     db.insert_video(table_name, video, view_count)
             elif is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video_details["snippet"]["description"]):
                 db.insert_video(table_name, video, view_count)
-        if finished or max_results < 50:
+        if finished or max_results <= 50:
             break
 
         counter += 1 

@@ -9,8 +9,14 @@
 <?php $page_name = 'vocalo'?>
 @endsection
 @section('breadcrumbs')
-{{Breadcrumbs::render('vocalo.gacha_result')}}
+{{Breadcrumbs::render('vocalo.gacha_result',$seed,$page)}}
 @endsection
+
+<?php 
+    $queries = array();
+    if(htmlspecialchars($seed) != 0 ) $queries['seed'] = htmlspecialchars($seed);
+    if(isset($page)) $queries['page'] = htmlspecialchars($page);
+?>
 
 @section('contents')
 <div class="row">
@@ -23,7 +29,11 @@
             <div class="row">
                 <h1 class="col-1 text-center pl-0"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
                 <div class="col-lg-6 p-0">
-                    <a href="{{route('vocalo.gacha_result.show',['id' => $vocalovideos[$i]->video_id])}}" style="display:block;">
+                    <?php 
+                        $video_queries = $queries;
+                        $video_queries['id'] = $vocalovideos[$i]->video_id;
+                    ?>
+                    <a href="{{route('vocalo.gacha_result.show',$video_queries)}}" style="display:block;">
                         <img src="http://i.ytimg.com/vi/{{$vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100  youtube-thumbnail">
                     </a>
                 </div>
@@ -41,9 +51,5 @@
             </div>
         </div>
     @endfor
-    <?php 
-        $queries = array();
-        if(htmlspecialchars($seed) != 0 ) $queries['seed'] = htmlspecialchars($seed);
-    ?>
     {{$vocalovideos->appends($queries)->links('vendor.pagination.original_pagination_view')}}
 @endsection

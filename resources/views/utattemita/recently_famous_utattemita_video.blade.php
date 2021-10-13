@@ -9,7 +9,7 @@
 <?php $page_name = 'utattemita'?>
 @endsection
 @section('breadcrumbs')
-{{Breadcrumbs::render('utattemita.recently_famous_utattemita')}}
+{{Breadcrumbs::render('utattemita.recently_famous_utattemita.show',htmlspecialchars_decode($utattemita_video->title,ENT_QUOTES),$utattemita_video->video_id,$page,$sort)}}
 @endsection
 @section('contents')
     <div class="row">
