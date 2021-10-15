@@ -14,7 +14,11 @@ class RecentlyFamousVocalovideoController extends Controller
         }else{
             $vocalovideos = DB::table('recently_famous_vocalovideos')->orderBy('published_at','desc')->orderBy('video_id')->paginate(10);
         }
-        return view('vocalo.recently_famous_vocalovideos',compact('vocalovideos','page','sort'));
+        $newest = DB::table('recently_famous_vocalovideos')->select('published_at')->orderBy('published_at','desc')->first();
+        $newest_date = $newest->published_at;
+        $oldest = DB::table('recently_famous_vocalovideos')->select('published_at')->orderBy('published_at')->first();
+        $oldest_date = $oldest->published_at;
+        return view('vocalo.recently_famous_vocalovideos',compact('vocalovideos','page','sort','newest_date','oldest_date'));
     }
     public function show(Request $request,$id){
         $page = $request->input('page',1);

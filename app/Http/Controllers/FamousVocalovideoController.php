@@ -15,7 +15,6 @@ class FamousVocalovideoController extends Controller
         }else{
             $vocalovideos = DB::table('famous_vocalovideos')->whereYear('published_at',$year)->orderBy('view_count','desc')->orderBy('video_id')->paginate(10);
         }
-        
         return view('vocalo.vocalo_ranking',compact('vocalovideos','page','year'));
     }
     public function show(Request $request,$id){

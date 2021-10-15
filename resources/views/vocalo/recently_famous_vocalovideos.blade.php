@@ -18,10 +18,10 @@
 ?>
 @section('contents')
     <div class="row">
-        <div class="ml-lg-4 mt-4 col-lg-6">
+        <div class="ml-lg-4 mt-4 col-lg-8">
             <h2>最近話題のボカロ</h2>
             <br>
-            <p>YouTubeで再生回数10万越えの話題になっているボカロ曲を集めました<br>見逃してる曲がないか確認しよう！</p>
+            <p>YouTubeで再生回数10万越えの話題になっているボカロ曲を集めました<br>見逃してる曲がないか確認しよう！<br><div class="text-secondary">({{$newest_date}}～{{$oldest_date}})</div></p>
         </div>
     </div>
     <div class="row">
