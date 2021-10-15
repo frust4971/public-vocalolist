@@ -40,6 +40,12 @@
             overflow-wrap: break-word;
             word-break: break-all;
         }
+
+        .rank{
+            position:absolute;
+            top:-5px;
+            z-index:1;
+        }
     </style>
     @yield('title')
     @yield('description')

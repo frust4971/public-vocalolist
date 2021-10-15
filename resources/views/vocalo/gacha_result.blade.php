@@ -27,13 +27,14 @@
     @for($i = 0;$i < count($vocalovideos);$i++)
         <div class="content px-2 py-5">
             <div class="row">
-                <h1 class="col-1 text-center pl-0"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
+                <h1 class="col-lg-1 d-none d-lg-block text-center pl-0 pl-0"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
                 <div class="col-lg-6 p-0">
                     <?php 
                         $video_queries = $queries;
                         $video_queries['id'] = $vocalovideos[$i]->video_id;
                     ?>
-                    <a href="{{route('vocalo.gacha_result.show',$video_queries)}}" style="display:block;">
+                    <a href="{{route('vocalo.gacha_result.show',$video_queries)}}" style="display:block;position:relative;">
+                        <h1 class="d-lg-none text-center rank"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
                         <img src="http://i.ytimg.com/vi/{{$vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100  youtube-thumbnail">
                     </a>
                 </div>

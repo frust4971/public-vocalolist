@@ -24,8 +24,10 @@
 ?>
 @section('contents')
     <div class="row">
-        <div class="h2 ml-lg-4 mt-4 col-lg-6">
-            歴代ボカロランキング
+        <div class="ml-lg-4 mt-4 col-lg-8">
+            <h2>歴代ボカロランキング</h2>
+            <br>
+            <p>YouTubeで再生回数100万越えのボカロを集めました。<br>年検索で年代ごとのランキング作成もできます。懐かしいあの頃の曲を振り返ろう！<br>ランキングに入っていない曲やボカロではない曲の報告は<a href="{{route('contact')}}">こちら</a>へ</p>
         </div>
     </div>
     <div class="row">
@@ -56,13 +58,14 @@
         @for($i = 0;$i < count($vocalovideos);$i++)
             <div class="content px-2 py-5">
                 <div class="row">
-                    <h1 class="col-1 text-center pl-0 pl-0"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
+                    <h1 class="col-lg-1 d-none d-lg-block text-center pl-0 pl-0"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
                     <div class="col-lg-6 p-0">
                         <?php 
                             $video_queries = $queries;
                             $video_queries['id'] = $vocalovideos[$i]->video_id;
                         ?>
-                        <a href="{{route('vocalo.vocalo_ranking.show',$video_queries)}}" style="display:block;">
+                        <a href="{{route('vocalo.vocalo_ranking.show',$video_queries)}}" style="display:block;position:relative;">
+                            <h1 class="d-lg-none text-center rank"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
                             <img src="http://i.ytimg.com/vi/{{$vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100  youtube-thumbnail">
                         </a>
                     </div>
