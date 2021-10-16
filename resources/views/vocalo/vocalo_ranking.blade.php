@@ -46,12 +46,14 @@
                 <?php
                     $year_queries = $queries;
                     unset($year_queries['year']);
+                    unset($year_queries['page']);
                 ?>
                 <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking',$year_queries)}}">-</a>
             @foreach($years as $y)
                 <?php
                     $year_queries = $queries;
                     $year_queries['year'] = $y;
+                    unset($year_queries['page']);
                 ?>
                 <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking',$year_queries)}}">{{$y}}</a>
             @endforeach 

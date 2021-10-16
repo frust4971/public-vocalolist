@@ -35,7 +35,7 @@
             </button>
             
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/vocalo/recently_famous_vocalovideos">投稿日順</a>
+                <a class="dropdown-item" href="{{route('vocalo.recently_famous_vocalovideos')}}">投稿日順</a>
                 <a class="dropdown-item" href="{{route('vocalo.recently_famous_vocalovideos',['sort' => 1])}}">再生回数順</a>
             </div>
         </div>

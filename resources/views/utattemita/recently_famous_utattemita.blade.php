@@ -34,7 +34,7 @@
             </button>
             
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/utattemita/recently_famous_utattemita">投稿日順</a>
+                <a class="dropdown-item" href="{{route('utattemita.recently_famous_utattemita')}}">投稿日順</a>
                 <a class="dropdown-item" href="{{route('utattemita.recently_famous_utattemita',['sort' => 1])}}">再生回数順</a>
             </div>
         </div>
