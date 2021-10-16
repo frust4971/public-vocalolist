@@ -43,7 +43,11 @@
             </button>
             
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking')}}">-</a>
+                <?php
+                    $year_queries = $queries;
+                    $year_queries['year'] = 0;
+                ?>
+                <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking',$year_queries)}}">-</a>
             @foreach($years as $y)
                 <?php
                     $year_queries = $queries;
