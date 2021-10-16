@@ -93,8 +93,7 @@
         @endfor
     @endif
     <div class="row">
-        <div class="col-0 col-lg-1"></div>
-        {{$vocalovideos->appends($queries)->links('vendor.pagination.ranking_pagination_view')}}
+        <div class="pr-lg-0 col-12 col-lg-7 d-flex justify-content-center justify-content-lg-end">{{$vocalovideos->appends($queries)->links('vendor.pagination.ranking_pagination_view')}}</div>
     </div>
     <br>
     <div class="row">
@@ -103,13 +102,15 @@
                 <div class="card-body">
                     <div class="h5 mb-3">キャラクターで探す</div>
                     <ul style="display:flex;flex-wrap:wrap;">
-
                     @foreach(config('const.VOCALOIDS') as $VOCALOID)
-                        <?php 
+                    <?php 
                             $vocaloid_queries = $queries;
+                            if(isset($vocaloid_queries['vocaloid']) and $vocaloid_queries['vocaloid'] != $VOCALOID){
+                                unset($vocaloid_queries['page']);
+                            }
                             $vocaloid_queries['vocaloid'] = $VOCALOID;
                         ?>
-                        <li class="mx-1 mb-2 btn btn-secondary" ><a class="text-light text-decoration-none" href="{{route('vocalo.vocalo_ranking',$vocaloid_queries)}}">{{$VOCALOID}}</a></li>
+                        <li class="mx-1 mb-2 btn btn-secondary" style="width:90px"><a class="text-light text-decoration-none" href="{{route('vocalo.vocalo_ranking',$vocaloid_queries)}}">{{$VOCALOID}}</a></li>
                     @endforeach
                     
                     </ul>
