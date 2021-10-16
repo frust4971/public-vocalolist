@@ -20,7 +20,7 @@
         <div class="ml-lg-4 mt-4 col-lg-6">
             <h2>最近話題の歌ってみた</h2>
             <br>
-            <p>YouTubeで再生回数10万越えの話題になっている歌ってみたを集めました<br>お気に入りの歌い手さんに出会えるかも！<div class="text-secondary">({{$newest_date}}～{{$oldest_date}})</div></p>
+            <p>YouTubeで再生回数10万越えの話題になっている歌ってみたを集めました。<br>お気に入りの歌い手さんに出会えるかも！<div class="text-secondary">期間: ({{$newest_date}}～{{$oldest_date}})</div></p>
         </div>
     </div>
     <div class="row">

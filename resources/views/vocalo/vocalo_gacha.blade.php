@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="ml-lg-3">
-        <p>再生回数100万越えのボカロをランダムで探すよ</p>
+        <p>再生回数100万越えのボカロをランダムで探すよ。</p>
         <p>好みの曲と出会えるといいね！</p>
         <img src="/image/folder.png" class="ml-3" width="150" height="150">
         <br>
