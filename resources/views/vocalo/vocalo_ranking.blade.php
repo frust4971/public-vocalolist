@@ -9,7 +9,7 @@
 <?php $page_name = 'vocalo'?>
 @endsection
 @section('breadcrumbs')
-{{Breadcrumbs::render('vocalo.vocalo_ranking',$page,$year)}}
+{{Breadcrumbs::render('vocalo.vocalo_ranking',$page,$year,$vocaloid)}}
 @endsection
 <?php
     $years = [];
@@ -21,6 +21,7 @@
     $queries = array();
     if(isset($page)) $queries['page'] = htmlspecialchars($page);
     if(htmlspecialchars($year) != 0 ) $queries['year'] = htmlspecialchars($year);
+    if(isset($vocaloid)) $queries['vocaloid'] = htmlspecialchars($vocaloid);
 ?>
 @section('contents')
     <div class="row">
@@ -44,7 +45,11 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking')}}">-</a>
             @foreach($years as $y)
-                <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking',['year' => $y])}}">{{$y}}</a>
+                <?php
+                    $year_queries = $queries;
+                    $year_queries[$y] = $y;
+                ?>
+                <a class="dropdown-item" href="{{route('vocalo.vocalo_ranking',$year_queries)}}">{{$y}}</a>
             @endforeach 
             </div>
         
@@ -83,5 +88,31 @@
             </div>
         @endfor
     @endif
-    {{$vocalovideos->appends($queries)->links('vendor.pagination.ranking_pagination_view')}}
+    <div class="row">
+        <div class="col-0 col-lg-1"></div>
+        {{$vocalovideos->appends($queries)->links('vendor.pagination.ranking_pagination_view')}}
+    </div>
+    <br>
+    <div class="row">
+        <div class=" col-lg-7">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="h5 mb-3">キャラクターで探す</div>
+                    <ul style="display:flex;flex-wrap:wrap;">
+
+                    @foreach(config('const.VOCALOIDS') as $VOCALOID)
+                        <?php 
+                            $vocaloid_queries = $queries;
+                            $vocaloid_queries['vocaloid'] = $VOCALOID;
+                        ?>
+                        <li class="mx-1 mb-2 btn btn-secondary" ><a class="text-light text-decoration-none" href="{{route('vocalo.vocalo_ranking',$vocaloid_queries)}}">{{$VOCALOID}}</a></li>
+                    @endforeach
+                    
+                    </ul>
+                    <div class="mx-1 mb-2 btn btn-secondary float-right"><a class="text-light text-decoration-none" href="{{route('vocalo.vocalo_ranking')}}">指定なし</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 @endsection

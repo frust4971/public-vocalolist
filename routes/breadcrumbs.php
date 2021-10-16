@@ -20,18 +20,20 @@ Breadcrumbs::for('vocalo.recently_famous_vocalovideos.show',function($trail,$tit
 });
 
 
-Breadcrumbs::for('vocalo.vocalo_ranking',function($trail,$page,$year){
+Breadcrumbs::for('vocalo.vocalo_ranking',function($trail,$page,$year,$vocaloid){
     $trail->parent('home');
     $params = [];
     if(isset($page)) $params['page'] = $page;
-    if(isset($year)) $params['year'] = $year;
+    if($year != 0) $params['year'] = $year;
+    if(isset($vocaloid)) $params['vocaloid'] = $vocaloid;
     $trail->push('歴代ボカロランキング',route('vocalo.vocalo_ranking',$params));
 });
-Breadcrumbs::for('vocalo.vocalo_ranking.show',function($trail,$title,$id,$page,$year){
-    $trail->parent('vocalo.vocalo_ranking',$page,$year);
+Breadcrumbs::for('vocalo.vocalo_ranking.show',function($trail,$title,$id,$page,$year,$vocaloid){
+    $trail->parent('vocalo.vocalo_ranking',$page,$year,$vocaloid);
     $params = ['id' => $id];
     if(isset($page)) $params['page'] = $page;
-    if(isset($year)) $params['year'] = $year;
+    if($year != 0) $params['year'] = $year;
+    if(isset($vocaloid)) $params['vocaloid'] = $vocaloid;
     $trail->push($title,route('vocalo.vocalo_ranking.show',$params));
 });
 
