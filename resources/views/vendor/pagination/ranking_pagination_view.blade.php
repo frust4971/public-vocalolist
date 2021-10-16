@@ -32,12 +32,13 @@
         @endif
 
         {{-- 処理部分 --}}
-        @for ($i = $start_page; $i <= $end_page; $i++) @if ($i==$paginator->currentPage())
-            <li class="page-item active"><span class="page-link">{{ $i }}</span></li>
+        @for ($i = $start_page; $i <= $end_page; $i++) 
+            @if ($i==$paginator->currentPage())
+                <li class="page-item active"><span class="page-link">{{ $i }}</span></li>
             @else
-            <li class="page-item"><a class="page-link" href="{{ $paginator->url($i) }}">{{ $i }}</a></li>
+                <li class="page-item {{$i == $end_page ? 'd-none d-sm-block' : ''}}"><a class="page-link" href="{{ $paginator->url($i) }}">{{ $i }}</a></li>
             @endif
-            @endfor
+        @endfor
 
             {{-- Last Page Link --}}
             <!-- 最後のページへのリンク -->
