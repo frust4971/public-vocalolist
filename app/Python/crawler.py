@@ -111,6 +111,11 @@ def get_video(video_id):
     video = response["items"][0]
     return video
 
+def check_video(title,description,is_utattemita_table=False):
+    if is_utattemita_table:
+        return is_utattemita_title(video["snippet"]["title"]) and is_utattemita_description(video_details["snippet"]["description"])
+    return is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video_details["snippet"]["description"])
+
 def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count, published_after=None, published_before=None,num_search=50,order_by="viewCount",must_disconnect_db=False):
     """
     再生回数順の検索結果を指定したテーブルに挿入する。テーブルが整理対象であれば同時に整理も行う
@@ -166,12 +171,10 @@ def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count
                 break
             if db.is_inserted_item(table_name, video["id"]["videoId"]):
                 continue
-
-            if is_utattemita_table:
-                if is_utattemita_title(video["snippet"]["title"]) and is_utattemita_description(video_details["snippet"]["description"]):
-                    db.insert_video(table_name, video, view_count)
-            elif is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video_details["snippet"]["description"]):
+            
+            if check_video(video["snippet"]["title"], video_details["snippet"]["description"],is_utattemita_table=is_utattemita_table):
                 db.insert_video(table_name, video, view_count)
+
         if finished or max_results <= 50:
             break
 
@@ -229,9 +232,10 @@ def crawl_and_insert_famous_vocalovideos_into_db(table_name, word,  video_durati
             if db.is_inserted_item(table_name, video["id"]["videoId"]):
                 db.update_view_count(table_name,video["id"]["videoId"],view_count)
                 continue
-
-            if is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video_details["snippet"]["description"]):
+            
+            if check_video(video["snippet"]["title"], video_details["snippet"]["description"]):
                 db.insert_video(table_name, video, view_count)
+            
         if finished:
             break
         search_response = crawl(word, video_duration,published_after,published_before,page_token=search_response["nextPageToken"])
