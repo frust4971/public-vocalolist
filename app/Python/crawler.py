@@ -113,8 +113,8 @@ def get_video(video_id):
 
 def check_video(title,description,is_utattemita_table=False):
     if is_utattemita_table:
-        return is_utattemita_title(video["snippet"]["title"]) and is_utattemita_description(video_details["snippet"]["description"])
-    return is_vocalo_title(video["snippet"]["title"]) and is_vocalo_description(video_details["snippet"]["description"])
+        return is_utattemita_title(title) and is_utattemita_description(description)
+    return is_vocalo_title(title) and is_vocalo_description(description)
 
 def crawl_and_insert_into_db(table_name, word, video_duration, filter_view_count, published_after=None, published_before=None,num_search=50,order_by="viewCount",must_disconnect_db=False):
     """
