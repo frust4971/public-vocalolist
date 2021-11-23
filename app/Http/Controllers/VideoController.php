@@ -16,12 +16,18 @@ class VideoController extends Controller
         }
         
         $page = $request->input('page',1);
+        $year = $request->input('year',0);
         $sort = $request->input('sort',0);
         $table = DB::table($table_name);
         if($sort == 1){
             $videos = $table->orderBy('view_count','desc')->orderBy('video_id')->paginate(10);
         }else{
             $videos = $table->orderBy('published_at','desc')->orderBy('video_id')->paginate(10);
+        }
+        if($year == 0){
+            $videos = $table->orderBy('view_count','desc')->orderBy('video_id')->paginate(10);
+        }else{
+            $videos = $table->whereYear('published_at',$year)->orderBy('view_count','desc')->orderBy('video_id')->paginate(10);
         }
         return $videos;
     }

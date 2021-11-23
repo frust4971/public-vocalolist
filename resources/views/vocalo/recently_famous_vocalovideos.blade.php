@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <video-list table-name="recently_famous_vocalovideos" :queries='@json($queries)'></video-list>
+    <video-list table-name="recently_famous_vocalovideos" :queries='@json($queries)' drop-down-type='year'></video-list>
     <div class="row">
         <div class="pr-lg-0 col-12 col-lg-7 d-flex justify-content-center justify-content-lg-end">{{$vocalovideos->appends($queries)->links('vendor.pagination.original_pagination_view')}}</div>
     </div>

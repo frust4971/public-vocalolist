@@ -1928,14 +1928,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['params'],
+  props: ['params', 'type'],
+  data: function data() {
+    return {
+      years: this.getYears()
+    };
+  },
+  created: function created() {
+    console.log(this.type);
+  },
   methods: {
     getSortName: function getSortName(sort) {
-      console.log('koko');
-      console.log(this.params);
-      console.log(sort);
-
       switch (sort) {
         case '1':
           return '再生回数順';
@@ -1945,12 +1962,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     sort: function sort(sortId) {
-      console.log('hey');
-
       var queries = _objectSpread(_objectSpread({}, this.params), {}, {
         'sort': sortId
       });
 
+      delete queries.page;
+      this.$emit('load', queries);
+    },
+    getYears: function getYears() {
+      var years = [];
+      var currentY = new Date().getFullYear();
+
+      for (var y = currentY; y >= 2007; y--) {
+        years.push(y);
+      }
+
+      return years;
+    },
+    search: function search(year) {
+      var queries = _objectSpread(_objectSpread({}, this.params), {}, {
+        'year': year
+      });
+
+      delete queries.page;
+
+      if (year == 0) {
+        delete queries.year;
+      }
+
+      console.log(queries);
       this.$emit('load', queries);
     }
   }
@@ -1988,7 +2028,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {}
+});
 
 /***/ }),
 
@@ -2041,7 +2083,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['tableName', 'queries'],
+  props: ['tableName', 'queries', 'dropDownType'],
   components: {
     'pagination': _Pagination_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     'drop-down': _DropDown_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -2055,22 +2097,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   created: function created() {
-    console.log('hello');
-    console.log(this.tableName);
-    console.log(this.queries);
-    console.log(_objectSpread({}, this.queries));
-    console.log(_objectSpread({}, this.params));
+    console.log(this.dropDownType);
     this.loadVideos(this.params);
   },
   methods: {
     loadVideos: function loadVideos(queries) {
-      console.log('gi');
       var that = this;
       this.params = _objectSpread(_objectSpread({}, this.params), queries);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://localhost:8000/api/video', {
         params: that.params
       }).then(function (response) {
-        console.log(response.data);
         that.videos = response.data.data;
       });
     }
@@ -37192,65 +37228,137 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "dropdown text-right my-1  ml-lg-3 col-lg-7" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary dropdown-toggle ",
-          attrs: {
-            type: "button",
-            id: "dropdownMenuButton",
-            "data-toggle": "dropdown",
-            "aria-haspopup": "true",
-            "aria-expanded": "false"
-          }
-        },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.getSortName(_vm.params.sort)) +
-              "\n        "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "dropdown-menu dropdown-menu-right",
-          attrs: { "aria-labelledby": "dropdownMenuButton" }
-        },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "dropdown-item",
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  return _vm.sort("0")
+    _vm.type == "year"
+      ? _c(
+          "div",
+          { staticClass: "dropdown text-right my-1  ml-lg-3 col-lg-7" },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary dropdown-toggle",
+                attrs: {
+                  type: "button",
+                  id: "dropdownMenuButton",
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
                 }
-              }
-            },
-            [_vm._v("投稿日順")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "dropdown-item",
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  return _vm.sort("1")
+              },
+              [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.params.year ? _vm.params.year : "年検索") +
+                    "\n        "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu dropdown-menu-right",
+                attrs: { "aria-labelledby": "dropdownMenuButton" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.search(0)
+                      }
+                    }
+                  },
+                  [_vm._v("-")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.years, function(y) {
+                  return _c(
+                    "a",
+                    {
+                      key: y,
+                      staticClass: "dropdown-item",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.search(y)
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(y))]
+                  )
+                })
+              ],
+              2
+            )
+          ]
+        )
+      : _c(
+          "div",
+          { staticClass: "dropdown text-right my-1  ml-lg-3 col-lg-7" },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary dropdown-toggle ",
+                attrs: {
+                  type: "button",
+                  id: "dropdownMenuButton",
+                  "data-toggle": "dropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
                 }
-              }
-            },
-            [_vm._v("再生回数順")]
-          )
-        ]
-      )
-    ])
+              },
+              [
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.getSortName(_vm.params.sort)) +
+                    "\n        "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu dropdown-menu-right",
+                attrs: { "aria-labelledby": "dropdownMenuButton" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.sort("0")
+                      }
+                    }
+                  },
+                  [_vm._v("投稿日順")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "dropdown-item",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.sort("1")
+                      }
+                    }
+                  },
+                  [_vm._v("再生回数順")]
+                )
+              ]
+            )
+          ]
+        )
   ])
 }
 var staticRenderFns = []
@@ -37393,7 +37501,7 @@ var render = function() {
     "div",
     [
       _c("drop-down", {
-        attrs: { params: _vm.params },
+        attrs: { params: _vm.params, type: _vm.dropDownType },
         on: { load: _vm.loadVideos }
       }),
       _vm._v(" "),
@@ -52869,7 +52977,6 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /* harmony import */ var _components_VideoList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/VideoList.vue */ "./resources/js/components/VideoList.vue");
-/* harmony import */ var _components_Pagination_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Pagination.vue */ "./resources/js/components/Pagination.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -52890,7 +52997,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -52900,8 +53006,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 var app = new Vue({
   el: '#app',
   components: {
-    'video-list': _components_VideoList_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    'pagenation': _components_Pagination_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    'video-list': _components_VideoList_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
     console.log('hoge');

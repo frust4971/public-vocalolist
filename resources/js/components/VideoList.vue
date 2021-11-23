@@ -1,6 +1,6 @@
 <template>
     <div>
-        <drop-down :params="params" @load="loadVideos"></drop-down>
+        <drop-down :params="params" :type="dropDownType" @load="loadVideos"></drop-down>
         <div class="content px-2 py-5"  v-for="v in videos" :key="v.video_id">
             <div class="row">
                 <h1 class="col-lg-1 d-none d-lg-block text-center pl-0 pl-0"><span class="badge badge-secondary">1</span></h1>
@@ -29,7 +29,7 @@ import axios from 'axios';
 import Pagination from './Pagination.vue';
 import DropDown from './DropDown.vue';
 export default {
-    props: ['tableName','queries'],
+    props: ['tableName','queries','dropDownType'],
         components: {
         'pagination': Pagination,
         'drop-down': DropDown
@@ -44,6 +44,7 @@ export default {
         }
     },
     created(){
+        console.log(this.dropDownType);
         this.loadVideos(this.params);
     },
     methods:{
