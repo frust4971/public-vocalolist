@@ -75,7 +75,7 @@
                             <div class="d-lg-none d-block">
                                 <div class="col-12">
                                     <a href="{{route('vocalo.recently_famous_vocalovideos.show',['id' => $pickup_vocalovideos[$i]->video_id])}}" style="display:block;">
-                                        <div class="ytp-title ytp-title-text pl-2">{{$pickup_vocalovideos[$i]->title}}</div>
+                                        <div class="ytp-title ytp-title-text pl-2">{{htmlspecialchars_decode($pickup_vocalovideos[$i]->title,ENT_QUOTES)}}</div>
                                         <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                     </a>
                                 </div>
