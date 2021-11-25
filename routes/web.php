@@ -12,24 +12,18 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/test', function(){
-    return view('test');
-})->name('home');
+
 
 Route::get('/info/about_site',function(){
     return view('info.about_site');
 })->name('info.about_site');
 Route::get('/vocalo/recently_famous_vocalovideos','RecentlyFamousVocalovideoController@index')->name('vocalo.recently_famous_vocalovideos');
-Route::get('/vocalo/recently_famous_vocalovideos/{id}','RecentlyFamousVocalovideoController@show')->name('vocalo.recently_famous_vocalovideos.show');
 Route::get('/vocalo/vocalo_ranking','FamousVocalovideoController@index')->name('vocalo.vocalo_ranking');
-Route::get('/vocalo/vocalo_ranking/{id}','FamousVocalovideoController@show')->name('vocalo.vocalo_ranking.show');
 Route::get('/vocalo/vocalo_gacha',function(){
     return view('vocalo.vocalo_gacha');
 })->name('vocalo.vocalo_gacha');
 Route::get('/vocalo/gacha_result','VocaloGachaController@index')->name('vocalo.gacha_result');
-Route::get('/vocalo/gacha_result/{id}','VocaloGachaController@show')->name('vocalo.gacha_result.show');
 Route::get('/utattemita/recently_famous_utattemita','RecentlyFamousUtattemitaController@index')->name('utattemita.recently_famous_utattemita');
-Route::get('/utattemita/recently_famous_utattemita/{id}','RecentlyFamousUtattemitaController@show')->name('utattemita.recently_famous_utattemita.show');
 Route::get('/contact',function(){
     return view('contact');
 })->name('contact');

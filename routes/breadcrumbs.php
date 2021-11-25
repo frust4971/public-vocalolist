@@ -4,49 +4,24 @@ Breadcrumbs::for('home',function($trail){
 });
 
 
-Breadcrumbs::for('vocalo.recently_famous_vocalovideos',function($trail,$page,$sort){
+Breadcrumbs::for('vocalo.recently_famous_vocalovideos',function($trail){
     $trail->parent('home');
-    $params = [];
-    if(isset($page)) $params['page'] = $page;
-    if(isset($sort)) $params['sort'] = $sort;
-    $trail->push('最近話題のボカロ',route('vocalo.recently_famous_vocalovideos',$params));
-});
-Breadcrumbs::for('vocalo.recently_famous_vocalovideos.show',function($trail,$title,$id,$page,$sort){
-    $trail->parent('vocalo.recently_famous_vocalovideos',$page,$sort);
-    $params = ['id' => $id];
-    if(isset($page)) $params['page'] = $page;
-    if(isset($sort)) $params['sort'] = $sort;
-    $trail->push($title,route('vocalo.recently_famous_vocalovideos.show',$params));
+    $trail->push('最近話題のボカロ',route('vocalo.recently_famous_vocalovideos'));
 });
 
 
-Breadcrumbs::for('vocalo.vocalo_ranking',function($trail,$page,$year,$vocaloid){
+Breadcrumbs::for('vocalo.vocalo_ranking',function($trail){
     $trail->parent('home');
-    $params = [];
-    if(isset($page)) $params['page'] = $page;
-    if($year != 0) $params['year'] = $year;
-    if(isset($vocaloid)) $params['vocaloid'] = $vocaloid;
-    $trail->push('歴代ボカロランキング',route('vocalo.vocalo_ranking',$params));
-});
-Breadcrumbs::for('vocalo.vocalo_ranking.show',function($trail,$title,$id,$page,$year,$vocaloid){
-    $trail->parent('vocalo.vocalo_ranking',$page,$year,$vocaloid);
-    $params = ['id' => $id];
-    if(isset($page)) $params['page'] = $page;
-    if($year != 0) $params['year'] = $year;
-    if(isset($vocaloid)) $params['vocaloid'] = $vocaloid;
-    $trail->push($title,route('vocalo.vocalo_ranking.show',$params));
+    $trail->push('歴代ボカロランキング',route('vocalo.vocalo_ranking'));
 });
 
 Breadcrumbs::for('vocalo.vocalo_gacha',function($trail){
     $trail->parent('home');
     $trail->push('ボカロガチャ',route('vocalo.vocalo_gacha'));
 });
-Breadcrumbs::for('vocalo.gacha_result',function($trail,$seed,$page){
+Breadcrumbs::for('vocalo.gacha_result',function($trail){
     $trail->parent('vocalo.vocalo_gacha');
-    $params = [];
-    if(isset($seed)) $params['seed'] = $seed;
-    if(isset($page)) $params['page'] = $page;
-    $trail->push('ボカロガチャ結果',route('vocalo.gacha_result',$params));
+    $trail->push('ボカロガチャ結果',route('vocalo.gacha_result'));
 });
 Breadcrumbs::for('vocalo.gacha_result.show',function($trail,$title,$id,$seed,$page){
     $trail->parent('vocalo.gacha_result',$seed,$page);
@@ -57,19 +32,9 @@ Breadcrumbs::for('vocalo.gacha_result.show',function($trail,$title,$id,$seed,$pa
 });
 
 
-Breadcrumbs::for('utattemita.recently_famous_utattemita',function($trail,$page,$sort){
+Breadcrumbs::for('utattemita.recently_famous_utattemita',function($trail){
     $trail->parent('home');
-    $params = [];
-    if(isset($page)) $params['page'] = $page;
-    if(isset($sort)) $params['sort'] = $sort;
-    $trail->push('最近話題の歌ってみた',route('utattemita.recently_famous_utattemita',$params));
-});
-Breadcrumbs::for('utattemita.recently_famous_utattemita.show',function($trail,$title,$id,$page,$sort){
-    $trail->parent('utattemita.recently_famous_utattemita',$page,$sort);
-    $params = ['id' => $id];
-    if(isset($page)) $params['page'] = $page;
-    if(isset($sort)) $params['sort'] = $sort;
-    $trail->push($title,route('utattemita.recently_famous_utattemita.show',$params));
+    $trail->push('最近話題の歌ってみた',route('utattemita.recently_famous_utattemita'));
 });
 
 Breadcrumbs::for('info.about_site',function($trail){

@@ -32,8 +32,5 @@ const app = new Vue({
     el: '#app',
     components: {
         'video-list': VideoList,
-    },
-    created() {
-        console.log('hoge')
     }
 });

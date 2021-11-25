@@ -13,7 +13,7 @@
         
         </div>
 
-        <div class="dropdown text-right my-1  ml-lg-3 col-lg-7" v-else>
+        <div class="dropdown text-right my-1  ml-lg-3 col-lg-7" v-if="type == 'normal'">
             <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{getSortName(params.sort)}}
             </button>
@@ -33,13 +33,9 @@ export default{
             years : this.getYears()
         }
     },
-    created(){
-        console.log(this.type)
-    },
     methods:{
         getSortName(sort){
             switch(sort){
-                
                 case '1':
                     return '再生回数順'
                 default:
@@ -51,7 +47,7 @@ export default{
                 ...this.params,
                 'sort': sortId
                 };
-            delete queries.page;
+            queries.page = '1';
             this.$emit('load',queries);
         },
         getYears(){
@@ -67,7 +63,7 @@ export default{
                 ...this.params,
                 'year': year
             };
-            delete queries.page;
+            queries.page = '1';
             this.$emit('load',queries);
         }
     }

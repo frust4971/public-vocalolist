@@ -9,12 +9,8 @@
 <?php $page_name = 'utattemita'?>
 @endsection
 @section('breadcrumbs')
-{{Breadcrumbs::render('utattemita.recently_famous_utattemita',$page,$sort)}}
+{{Breadcrumbs::render('utattemita.recently_famous_utattemita')}}
 @endsection
-<?php $queries = array();
-    if(htmlspecialchars($sort) != 0 ) $queries['sort'] = htmlspecialchars($sort);
-    if(isset($page)) $queries['page'] = htmlspecialchars($page);
-?>
 @section('contents')
     <div class="row">
         <div class="ml-lg-4 mt-4 col-lg-6">
@@ -23,52 +19,5 @@
             <p>YouTubeで再生回数10万越えの話題になっている歌ってみたを集めました。<br>お気に入りの歌い手さんに出会えるかも！<div class="text-secondary">期間: ({{$newest_date}}～{{$oldest_date}})</div></p>
         </div>
     </div>
-    <div class="row">
-        <div class="dropdown text-right my-1  ml-lg-3 col-lg-7">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            @if($sort == 1)
-                再生回数順
-            @else
-                投稿日順
-            @endif
-            </button>
-            
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{route('utattemita.recently_famous_utattemita')}}">投稿日順</a>
-                <a class="dropdown-item" href="{{route('utattemita.recently_famous_utattemita',['sort' => 1])}}">再生回数順</a>
-            </div>
-        </div>
-    </div>
-    @for($i = 0;$i < count($utattemita);$i++)
-        <div class="content px-2 py-5">
-            <div class="row">
-                <h1 class="col-lg-1 d-none d-lg-block text-center pl-0 pl-0"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
-                <div class="col-lg-6 p-0">
-                    <?php 
-                        $video_queries = $queries;
-                        $video_queries['id'] = $utattemita[$i]->video_id;
-                    ?>
-                    <a href="{{route('utattemita.recently_famous_utattemita.show',$video_queries)}}" style="display:block;position:relative;">
-                        <h1 class="d-lg-none text-center rank"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
-                        <img src="http://i.ytimg.com/vi/{{$utattemita[$i]->video_id}}/maxresdefault.jpg" class="w-100  youtube-thumbnail">
-                    </a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-1 col-0"></div>
-                <h2 class="col-lg-6 bg-light py-2 border-left border-primary content-title">{{htmlspecialchars_decode($utattemita[$i]->title,ENT_QUOTES)}}</h2>
-            </div>
-            <div class="row">
-
-                <div class="col-lg-1 col-0"></div>
-                <div class="col-lg-3 col-6 text-left">再生回数<div class="font-weight-bold">{{$utattemita[$i]->view_count}}</div></div>
-                <div class="col-lg-3 col-6 text-right my-2">{{$utattemita[$i]->published_at}}</div>
-            </div>
-        </div>
-    @endfor
-    <div class="row">
-        <div class="pr-lg-0 col-12 col-lg-7 d-flex justify-content-center justify-content-lg-end">{{$utattemita->appends($queries)->links('vendor.pagination.original_pagination_view')}}</div>
-    </div>
-    
+    <video-list :queries='@json($queries)' table-name="recently_famous_utattemita" drop-down-type='normal' use-edge-link="false" :use-condition-card="false"></video-list> 
 @endsection

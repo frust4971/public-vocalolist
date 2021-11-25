@@ -63,7 +63,7 @@
                             <div class="d-none d-lg-flex">
                                 @for($j = $i * 3; $j < ($i + 1) * 3; $j++)
                                     <div class="col-4 p-1">
-                                        <a href="{{route('vocalo.recently_famous_vocalovideos.show',['id' => $pickup_vocalovideos[$j]->video_id])}}" style="display:block;">
+                                        <a href="{{route('vocalo.recently_famous_vocalovideos')}}" style="display:block;">
                                             <div class="ytp-title ytp-title-text">{{$pickup_vocalovideos[$j]->title}}</div>
                                             <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$j]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                         </a>
@@ -74,7 +74,7 @@
                         <div class="display-if-under-lg">
                             <div class="d-lg-none d-block">
                                 <div class="col-12">
-                                    <a href="{{route('vocalo.recently_famous_vocalovideos.show',['id' => $pickup_vocalovideos[$i]->video_id])}}" style="display:block;">
+                                    <a href="{{route('vocalo.recently_famous_vocalovideos')}}" style="display:block;">
                                         <div class="ytp-title ytp-title-text pl-2">{{htmlspecialchars_decode($pickup_vocalovideos[$i]->title,ENT_QUOTES)}}</div>
                                         <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                     </a>
@@ -113,7 +113,7 @@
                         <div class="d-none d-lg-flex">
                             @for($j = $i * 3; $j < ($i + 1) * 3; $j++)
                                 <div class="col-4 p-1">
-                                    <a href="{{route('utattemita.recently_famous_utattemita.show',['id' => $pickup_utattemita[$j]->video_id])}}" style="display:block;">
+                                    <a href="{{route('utattemita.recently_famous_utattemita')}}" style="display:block;">
                                         <div class="ytp-title ytp-title-text">{{$pickup_utattemita[$j]->title}}</div>
                                         <img src="http://i.ytimg.com/vi/{{$pickup_utattemita[$j]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                     </a>
@@ -125,7 +125,7 @@
                     <div class="display-if-under-lg">
                         <div class="d-lg-none d-block">
                             <div class="col-12">
-                                <a href="{{route('utattemita.recently_famous_utattemita.show',['id' => $pickup_utattemita[$i]->video_id])}}" style="display:block;">
+                                <a href="{{route('utattemita.recently_famous_utattemita')}}" style="display:block;">
                                     <div class="ytp-title ytp-title-text pl-2">{{$pickup_utattemita[$i]->title}}</div>
                                     <img src="http://i.ytimg.com/vi/{{$pickup_utattemita[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                 </a>
@@ -153,6 +153,7 @@
         <b>お知らせ</b>
     </div>
     <div class="card-body">
+        <div>動画の一覧表示から再生まで1つのページでできるようにしました(2021/11/25)</div>
         <a href="{{route('vocalo.vocalo_ranking')}}" class="text-dark"><div>歴代ボカロランキングに年検索を追加しました (2021/09/21)</div></a>
         <a href="{{route('contact')}}" class="text-dark"><div>お問い合わせフォームを設置しました (2021/04/18)</div></a>
     </div>
@@ -160,4 +161,5 @@
 <br>
 <p><a href="{{route('info.about_site')}}">このサイトについて</a></p>
 <br>
+<script src="{{asset('js/thumbnail-checker.js')}}"></script>
 @endsection
