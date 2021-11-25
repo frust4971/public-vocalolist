@@ -92,7 +92,6 @@
             @yield('contents')
         </div>
     </div>
-    <!-- <script src="{{asset('/js/thumbnail-checker.js')}}"></script> -->
-    <script src="{{asset('/js/app.js')}}"></script>
+    <script src="{{asset('/js/thumbnail-checker.js')}}"></script>
 </body>
 </html>

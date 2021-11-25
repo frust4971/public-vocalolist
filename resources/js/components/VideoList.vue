@@ -1,7 +1,7 @@
 <template>
     <div>
         <drop-down :params="params" :type="dropDownType" @load="loadVideos"></drop-down>
-        <div class="row" v-show="isLoading">
+        <div class="row" v-show="isLoading == true">
             <div class="h5 col-lg-6  ml-lg-4">読み込み中. . .</div>
         </div>
         <div class="content px-2 py-5"  v-for="(v, i) in videos" :key="v.video_id">
@@ -26,7 +26,7 @@
         </div>
         <pagination :params="params" :current-page="currentPage" :last-page="lastPage" :use-edge-link="useEdgeLink" :smartphone-page-limit="smartphonePageLimit" @load="loadVideos"></pagination>
         <br>
-        <condition-card :params="params" @load="loadVideos" v-if="useConditionCard"></condition-card>
+        <condition-card :params="params" @load="loadVideos" v-if="useConditionCard == true"></condition-card>
     </div>
 </template>
 <script>
@@ -62,7 +62,7 @@ export default {
             let that = this;
             this.isLoading = true;
             this.params = {...this.params,...queries};
-            axios.get('http://localhost:8000/api/video',{
+            axios.get('http://www.vocalolist.com/api/video',{
                 params: that.params
             })
             .then((response)=>{
