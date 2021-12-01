@@ -8,7 +8,8 @@ import crawler
 import db
 import const
 
-
+# famous_vocalo_crawlerでAPIのクォータの使用量を越えるようであれば、
+# このファイルに検索ワードを分けてfamous_vocalo_crawlerと合わせて二回動かすようにする
 if __name__ == "__main__":
     published_after = (datetime.datetime.today() + relativedelta(years=-6)).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     published_before = (datetime.datetime.today()).strftime('%Y-%m-%dT%H:%M:%S.%fZ')

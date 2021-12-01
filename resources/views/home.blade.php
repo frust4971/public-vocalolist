@@ -59,28 +59,27 @@
 
                 @for($i = 0; $i < 3; $i++)
                     <div class="carousel-item {{$i == 0 ? 'active' : NULL}}">
-                        <div class="display-if-lg-or-more">
-                            <div class="d-none d-lg-flex">
-                                @for($j = $i * 3; $j < ($i + 1) * 3; $j++)
-                                    <div class="col-4 p-1">
-                                        <a href="{{route('vocalo.recently_famous_vocalovideos')}}" style="display:block;">
-                                            <div class="ytp-title ytp-title-text">{{$pickup_vocalovideos[$j]->title}}</div>
-                                            <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$j]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
-                                        </a>
-                                    </div>
-                                @endfor
-                            </div>
-                        </div>
-                        <div class="display-if-under-lg">
-                            <div class="d-lg-none d-block">
-                                <div class="col-12">
+                        <!-- PC用表示画面 -->
+                        <div class="d-none d-lg-flex">
+                            @for($j = $i * 3; $j < ($i + 1) * 3; $j++)
+                                <div class="col-4 p-1">
                                     <a href="{{route('vocalo.recently_famous_vocalovideos')}}" style="display:block;">
-                                        <div class="ytp-title ytp-title-text pl-2">{{htmlspecialchars_decode($pickup_vocalovideos[$i]->title,ENT_QUOTES)}}</div>
-                                        <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
+                                        <div class="ytp-title ytp-title-text">{{$pickup_vocalovideos[$j]->title}}</div>
+                                        <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$j]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                     </a>
                                 </div>
+                            @endfor
+                        </div>
+                        <!-- タブレット、スマホ用表示画面 -->
+                        <div class="d-lg-none d-block">
+                            <div class="col-12">
+                                <a href="{{route('vocalo.recently_famous_vocalovideos')}}" style="display:block;">
+                                    <div class="ytp-title ytp-title-text pl-2">{{htmlspecialchars_decode($pickup_vocalovideos[$i]->title,ENT_QUOTES)}}</div>
+                                    <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
+                                </a>
                             </div>
                         </div>
+                        
                     </div>
                 @endfor
             </div>
