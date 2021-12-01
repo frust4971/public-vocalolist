@@ -34,16 +34,3 @@ Bootstrap(CSS)<br>
 # 備考
 AWS環境からHeroku環境へ移行しました<br>
 使用しているDBはMySQLです
-
-? 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
