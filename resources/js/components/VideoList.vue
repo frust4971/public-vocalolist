@@ -26,7 +26,7 @@
         </div>
         <pagination :params="params" :current-page="currentPage" :last-page="lastPage" :use-edge-link="useEdgeLink" :smartphone-page-limit="smartphonePageLimit" @load="loadVideos"></pagination>
         <br>
-        <condition-card :params="params" @load="loadVideos" v-if="useConditionCard == true"></condition-card>
+        <condition-card :params="params" @load="loadVideos" v-if="useConditionCard"></condition-card>
     </div>
 </template>
 <script>

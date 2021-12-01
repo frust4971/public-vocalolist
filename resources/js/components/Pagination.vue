@@ -2,18 +2,18 @@
     <div class="row">
         <div class="pr-lg-0 col-12 col-lg-7 w-100 d-flex justify-content-center justify-content-lg-end">
             <ul class="pagination d-md-flex d-none">
-                <li class="page-item" :class="{disabled: currentPage == 1}"  v-if="useEdgeLink == true"><a class="page-link" href="#" @click="change(1)">«</a></li>
+                <li class="page-item" :class="{disabled: currentPage == 1}"  v-if="useEdgeLink"><a class="page-link" href="#" @click="change(1)">«</a></li>
                 <li class="page-item" v-for="page in getPages(10)" :key="page"  :class="{active: page == currentPage}">
                     <a class="page-link" href="#" @click="change(page)">{{page}}</a>
                 </li>
-                <li class="page-item" :class="{disabled: currentPage == lastPage}" v-if="useEdgeLink == true"><a class="page-link" href="#" @click="change(lastPage)">»</a></li>
+                <li class="page-item" :class="{disabled: currentPage == lastPage}" v-if="useEdgeLink"><a class="page-link" href="#" @click="change(lastPage)">»</a></li>
             </ul>
             <ul class="pagination d-md-none d-flex">
-                <li class="page-item" :class="{disabled: currentPage == 1}"  v-if="useEdgeLink == true"><a class="page-link" href="#" @click="change(1)">«</a></li>
+                <li class="page-item" :class="{disabled: currentPage == 1}"  v-if="useEdgeLink"><a class="page-link" href="#" @click="change(1)">«</a></li>
                 <li class="page-item" v-for="page in getPages(smartphonePageLimit)" :key="page"  :class="{active: page == currentPage}">
                     <a class="page-link" href="#" @click="change(page)">{{page}}</a>
                 </li>
-                <li class="page-item" :class="{disabled: currentPage == lastPage}"  v-if="useEdgeLink == true"><a class="page-link" href="#" @click="change(lastPage)">»</a></li>
+                <li class="page-item" :class="{disabled: currentPage == lastPage}"  v-if="useEdgeLink"><a class="page-link" href="#" @click="change(lastPage)">»</a></li>
             </ul>
         </div>
     </div>
