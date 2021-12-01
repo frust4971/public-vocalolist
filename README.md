@@ -1,36 +1,36 @@
 # public-vocalolist
-[www.vocalolist.com](www.vocalolist.com)‚Ìƒ\[ƒXƒR[ƒhŒöŠJ—pƒŠƒ|ƒWƒgƒŠ‚Å‚·<br>
+[www.vocalolist.com](http://www.vocalolist.com)ã®ã‚½ãƒ¼ã‚¹ã‚³ãƒ¼ãƒ‰å…¬é–‹ç”¨ãƒªãƒã‚¸ãƒˆãƒªã§ã™<br>
 <br>
 <br>
 <br>
-# Žå‚È‹Lqƒtƒ@ƒCƒ‹‚ÌêŠ
-Pythonƒtƒ@ƒCƒ‹(“®‰æŽûWƒR[ƒh)<br>
-¨app/Python
+# ä¸»ãªè¨˜è¿°ãƒ•ã‚¡ã‚¤ãƒ«ã®å ´æ‰€
+Pythonãƒ•ã‚¡ã‚¤ãƒ«(å‹•ç”»åŽé›†ã‚³ãƒ¼ãƒ‰)<br>
+â†’app/Python
 <br>
 <br>
-JavaScriptƒtƒ@ƒCƒ‹(ƒVƒ“ƒOƒ‹ƒy[ƒW‚Ì“®“I“®ìƒR[ƒh)<br>
-¨resources/js
+JavaScriptãƒ•ã‚¡ã‚¤ãƒ«(ã‚·ãƒ³ã‚°ãƒ«ãƒšãƒ¼ã‚¸ã®å‹•çš„å‹•ä½œã‚³ãƒ¼ãƒ‰)<br>
+â†’resources/js
 <br>
 <br>
-PHPƒtƒ@ƒCƒ‹(ƒTƒCƒg‚Ìƒy[ƒW•\Ž¦‚È‚ÇA‘S”Ê“I‚ÈƒR[ƒh)<br>
-ƒRƒ“ƒgƒ[ƒ‰
-¨app/Http/Controllers<br>
-ƒ‚ƒfƒ‹
-¨app/Models<br>
-ƒrƒ…[
-¨resources/views<br>
-ƒ‹[ƒeƒBƒ“ƒO
-¨routes<br>
+PHPãƒ•ã‚¡ã‚¤ãƒ«(ã‚µã‚¤ãƒˆã®ãƒšãƒ¼ã‚¸è¡¨ç¤ºãªã©ã€å…¨èˆ¬çš„ãªã‚³ãƒ¼ãƒ‰)<br>
+ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©
+â†’app/Http/Controllers<br>
+ãƒ¢ãƒ‡ãƒ«
+â†’app/Models<br>
+ãƒ“ãƒ¥ãƒ¼
+â†’resources/views<br>
+ãƒ«ãƒ¼ãƒ†ã‚£ãƒ³ã‚°
+â†’routes<br>
 <br>
 <br>
 <br>
-# Žg—pƒtƒŒ[ƒ€ƒ[ƒN
+# ä½¿ç”¨ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 Laravel(PHP)<br>
 Vue.js(JavaScript)<br>
 Bootstrap(CSS)<br>
 <br>
 <br>
 <br>
-# ”õl
-AWSŠÂ‹«‚©‚çHerokuŠÂ‹«‚ÖˆÚs‚µ‚Ü‚µ‚½<br>
-Žg—p‚µ‚Ä‚¢‚éDB‚ÍMySQL‚Å‚·
+# å‚™è€ƒ
+AWSç’°å¢ƒã‹ã‚‰Herokuç’°å¢ƒã¸ç§»è¡Œã—ã¾ã—ãŸ<br>
+ä½¿ç”¨ã—ã¦ã„ã‚‹DBã¯MySQLã§ã™
