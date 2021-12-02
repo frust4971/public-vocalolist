@@ -11,7 +11,7 @@ class VideoController extends Controller
         if(is_null($table_name)){
             return null;
         }
-        if(!$this->table_exists($table_name)){
+        if(!$this->is_accessable_table($table_name)){
             return null;
         }
         $year = $request->input('year',0);
@@ -38,7 +38,7 @@ class VideoController extends Controller
         $videos = $query->paginate(10);
         return $videos;
     }
-    private function table_exists($table_name){
+    private function is_accessable_table($table_name){
         $tables = config('const.VIDEO_TABLES');
         return in_array($table_name,$tables);
     }
