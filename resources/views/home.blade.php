@@ -19,13 +19,14 @@
 <div class="card">
     <a class="text-dark" href="{{route('vocalo.recently_famous_vocalovideos')}}"><div class="card-header"><b>最近話題のボカロ曲</b></div></a>
     <div class="card-body">
-        <div id="carouselVocalovideosIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselVocalovideosIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselVocalovideosIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselVocalovideosIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselVocalovideosIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
+<<<<<<< HEAD
             <div class="row">
             @for($i = 0; $i < 3; $i++)
                 <div class="carousel-item {{$i == 0 ? 'active' : NULL}}">
@@ -36,18 +37,36 @@
                                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_vocalovideos[$j]->video_id}}"></iframe>
                                 </div>
                         @endfor
+=======
+
+                @for($i = 0; $i < 3; $i++)
+                    <div class="carousel-item {{$i == 0 ? 'active' : NULL}}">
+                        <div class="display-if-lg-or-more">
+                            <div class="d-none d-lg-flex">
+                                @for($j = $i * 3; $j < ($i + 1) * 3; $j++)
+                                    <div class="embed-responsive embed-responsive-16by9 col-4">
+                                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_vocalovideos[$j]->video_id}}"></iframe>
+                                    </div>
+                                @endfor
+                            </div>
+>>>>>>> 040c729 (divの数でバグがあった。修正)
                         </div>
-                    </div>
-                    <div class="display-if-under-lg">
-                        <div class="d-lg-none d-block">
-                            <div class="embed-responsive embed-responsive-16by9 carousel-grid col-12">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_vocalovideos[$i]->video_id}}"></iframe>
+                        <div class="display-if-under-lg">
+                            <div class="d-lg-none d-block">
+                                <div class="embed-responsive embed-responsive-16by9  col-12">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_vocalovideos[$i]->video_id}}"></iframe>
+                                </div>
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                 </div>
             @endfor
             </div>
+=======
+                @endfor
+
+>>>>>>> 040c729 (divの数でバグがあった。修正)
             </div>
             <a class="carousel-control-prev" href="#carouselVocalovideosIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -86,15 +105,14 @@
                     </div>
                     <div class="display-if-under-lg">
                         <div class="d-lg-none d-block">
-                            <div class="embed-responsive embed-responsive-16by9 carousel-grid col-12">
+                            <div class="embed-responsive embed-responsive-16by9  col-12">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$pickup_utattemita[$i]->video_id}}"></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endfor
-            </div>
 
+            @endfor
             </div>
             <a class="carousel-control-prev" href="#carouselUtattemitaIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
