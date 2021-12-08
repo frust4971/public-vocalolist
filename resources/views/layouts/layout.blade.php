@@ -3,7 +3,9 @@
 
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3DHJTMDG4X"></script>
+
     <script>
         window.dataLayer = window.dataLayer || [];
 
