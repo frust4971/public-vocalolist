@@ -1,0 +1,10 @@
+diff a/resources/views/layouts/layout.blade.php b/resources/views/layouts/layout.blade.php	(rejected hunks)
+@@ -3,7 +3,7 @@
+ 
+ <head>
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P065D8QS1F"></script>
++    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EWNTFR4YKH"></script>
+     <script>
+         window.dataLayer = window.dataLayer || [];
+ 
