@@ -12,4 +12,8 @@ class VocaloGachaController extends Controller
         $vocalovideos = DB::table('famous_vocalovideos')->inRandomOrder($seed)->paginate(10);
         return view('vocalo.gacha_result',compact('vocalovideos','page','seed'));
     }
+    public function show($id){
+        $vocalovideo = DB::table('famous_vocalovideos')->where('video_id',$id)->first();
+        return view('vocalo.gacha_result_video',compact('vocalovideo'));
+    }
 }

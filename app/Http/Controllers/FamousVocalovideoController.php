@@ -18,4 +18,8 @@ class FamousVocalovideoController extends Controller
         
         return view('vocalo.vocalo_ranking',compact('vocalovideos','year','page'));
     }
+    public function show($id){
+        $vocalovideo = DB::table('famous_vocalovideos')->where('video_id',$id)->first();
+        return view('vocalo.vocalo_ranking_video',compact('vocalovideo'));
+    }
 }

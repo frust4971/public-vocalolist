@@ -52,8 +52,10 @@
             <div class="content px-2 py-lg-3 py-2">
                 <div class="row">
                     <h1 class="col-1 text-center"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
-                    <div class="embed-responsive embed-responsive-16by9 col-lg-6">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{$vocalovideos[$i]->video_id}}"></iframe>
+                    <div class="col-lg-6 p-0">
+                        <a href="{{route('vocalo.vocalo_ranking.show',['id' => $vocalovideos[$i]->video_id])}}" style="display:block;">
+                            <img src="http://i.ytimg.com/vi/{{$vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100  youtube-thumbnail">
+                        </a>
                     </div>
                 </div>
 

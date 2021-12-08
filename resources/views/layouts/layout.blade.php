@@ -33,6 +33,7 @@
         .container {
             background-color: aliceblue;
         }
+
     </style>
     @yield('title')
     @yield('description')
@@ -78,5 +79,6 @@
     <div class="container mt-3">
         @yield('contents')
     </div>
+    <script src="{{asset('/js/thumbnail-checker.js')}}"></script>
 </body>
 </html>

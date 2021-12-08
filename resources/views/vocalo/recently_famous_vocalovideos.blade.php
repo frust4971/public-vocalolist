@@ -38,8 +38,8 @@
             <div class="row">
                 <h1 class="col-1 text-center"><span class="badge badge-secondary">{{$page > 0?10*($page-1)+$i+1:$i+1}}</span></h1>
                 <div class="col-lg-6 p-0">
-                    <a href="{{route('vocalo.recently_famous_vocalovideo',['id' => $vocalovideos[$i]->video_id])}}" style="display:block;">
-                        <img src="http://i.ytimg.com/vi/{{$vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100">
+                    <a href="{{route('vocalo.recently_famous_vocalovideos.show',['id' => $vocalovideos[$i]->video_id])}}" style="display:block;">
+                        <img src="http://i.ytimg.com/vi/{{$vocalovideos[$i]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                     </a>
                 </div>
             </div>

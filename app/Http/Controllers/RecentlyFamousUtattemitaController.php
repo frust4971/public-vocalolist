@@ -16,4 +16,9 @@ class RecentlyFamousUtattemitaController extends Controller
         }
         return view('utattemita.recently_famous_utattemita',compact('utattemita','page','sort'));
     }
+
+    public function show($id){
+        $utattemita_video = DB::table('recently_famous_utattemita')->where('video_id',$id)->first();
+        return view('utattemita.recently_famous_utattemita_video',compact('utattemita_video'));
+    }
 }
