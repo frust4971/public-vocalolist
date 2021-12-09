@@ -27,7 +27,15 @@
 </template>
 <script>
 export default{
-    props:['params','type'],
+    props:{
+        'params': Object,
+        'type': {
+            type: String,
+            validator(value){
+                return ['normal','year','notUse'].indexOf(value) !== -1
+            }
+        }
+    },
     data(){
         return {
             years : this.getYears()

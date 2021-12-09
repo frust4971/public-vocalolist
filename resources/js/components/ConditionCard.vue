@@ -17,7 +17,9 @@
 </template>
 <script>
 export default{
-    props:['params'],
+    props:{
+        'params': Object
+    },
     data(){
         return {
             vocaloids: ['初音ミク','鏡音リン','鏡音レン','GUMI','flower','音街ウナ','可不','歌愛ユキ','巡音ルカ']

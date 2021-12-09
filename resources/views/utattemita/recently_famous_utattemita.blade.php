@@ -19,5 +19,5 @@
             <p>YouTubeで再生回数10万越えの話題になっている歌ってみたを集めました。<br>お気に入りの歌い手さんに出会えるかも！<div class="text-secondary">期間: ({{$newest_date}}～{{$oldest_date}})</div></p>
         </div>
     </div>
-    <video-list :queries='@json($queries)' table-name="recently_famous_utattemita" drop-down-type='normal' use-edge-link="false" :use-condition-card="false"></video-list> 
+    <video-list :queries='@json($queries)' table-name="recently_famous_utattemita" drop-down-type='normal'></video-list> 
 @endsection

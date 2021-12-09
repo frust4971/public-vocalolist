@@ -35,7 +35,22 @@ import Pagination from './Pagination.vue';
 import DropDown from './DropDown.vue';
 import ConditionCard from './ConditionCard.vue';
 export default {
-    props: ['queries','tableName','dropDownType','useEdgeLink','useConditionCard'],
+    props: {
+        'queries': Object,
+        'tableName': String,
+        'dropDownType': {
+            type: String,
+            default: 'notUse'
+        },
+        'useEdgeLink': {
+            type: Boolean,
+            default: false
+        } ,
+        'useConditionCard':{
+            type: Boolean,
+            default: false
+        } 
+    },
         components: {
         'pagination': Pagination,
         'drop-down': DropDown,

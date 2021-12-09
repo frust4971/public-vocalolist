@@ -17,5 +17,5 @@
             <h2>ガチャ結果</h2>
         </div>
     </div>
-    <video-list :queries='@json($queries)' table-name="recently_famous_vocalovideos" drop-down-type='' use-edge-link="false" :use-condition-card="true"></video-list> 
+    <video-list :queries='@json($queries)' table-name="recently_famous_vocalovideos" :use-condition-card="true"></video-list> 
 @endsection

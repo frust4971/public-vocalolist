@@ -21,7 +21,13 @@
 
 <script>
 export default{
-    props:['params','currentPage','lastPage','useEdgeLink','smartphonePageLimit'],
+    props:{
+        'params': Object,
+        'currentPage': Number,
+        'lastPage': Number,
+        'useEdgeLink': Boolean,
+        'smartphonePageLimit': Number
+        },
     methods:{
         change(page){
             let queries = {

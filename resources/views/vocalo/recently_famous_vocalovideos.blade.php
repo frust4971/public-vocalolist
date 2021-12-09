@@ -19,5 +19,5 @@
             <p>YouTubeで再生回数10万越えの話題になっているボカロ曲を集めました。<br>見逃してる曲がないか確認しよう！<br><div class="text-secondary">期間: ({{$newest_date}}～{{$oldest_date}})</div></p>
         </div>
     </div>
-    <video-list :queries='@json($queries)' table-name="recently_famous_vocalovideos" drop-down-type='normal' use-edge-link="false" :use-condition-card="true"></video-list> 
+    <video-list :queries='@json($queries)' table-name="recently_famous_vocalovideos" drop-down-type='normal' :use-condition-card="true"></video-list> 
 @endsection

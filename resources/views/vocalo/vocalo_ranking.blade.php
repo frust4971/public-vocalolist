@@ -19,6 +19,6 @@
             <p>YouTubeで再生回数100万越えのボカロを集めました。<br>年検索で年代ごとのランキング作成もできます。懐かしいあの頃の曲を振り返ろう！<br>ランキングに入っていない曲やボカロではない曲の報告は<a href="{{route('contact')}}">こちら</a>へ。</p>
         </div>
     </div>
-    <video-list :queries='@json($queries)' table-name="famous_vocalovideos" drop-down-type='year' use-edge-link="true" :use-condition-card="true"></video-list> 
+    <video-list :queries='@json($queries)' table-name="famous_vocalovideos" drop-down-type='year' :use-edge-link="true" :use-condition-card="true"></video-list> 
     
 @endsection
