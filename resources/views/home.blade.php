@@ -64,7 +64,7 @@
                             @for($j = $i * 3; $j < ($i + 1) * 3; $j++)
                                 <div class="col-4 p-1">
                                     <a href="{{route('vocalo.recently_famous_vocalovideos')}}" style="display:block;">
-                                        <div class="ytp-title ytp-title-text">{{$pickup_vocalovideos[$j]->title}}</div>
+                                        <div class="ytp-title ytp-title-text">{{htmlspecialchars_decode($pickup_vocalovideos[$i]->title,ENT_QUOTES)}}</div>
                                         <img src="http://i.ytimg.com/vi/{{$pickup_vocalovideos[$j]->video_id}}/maxresdefault.jpg" class="w-100 youtube-thumbnail">
                                     </a>
                                 </div>
