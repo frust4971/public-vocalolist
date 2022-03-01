@@ -105,7 +105,6 @@
                 <li data-target="#carouselUtattemitaIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
-            <div class="row">
             @for($i = 0; $i < 3; $i++)
                 <div class="carousel-item {{$i == 0 ? 'active' : NULL}}">
                     <div class="display-if-lg-or-more">
